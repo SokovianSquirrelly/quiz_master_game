@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyHomePage(title: 'Home Page',));
 }
 
 class SettingsButton extends StatelessWidget
@@ -52,7 +52,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp();
+    return const MaterialApp(
+      title: "Quiz Master",
+      home: Scaffold(
+      )
+    );
   }
 }
 
@@ -63,21 +67,23 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            SettingsButton(),
-            Text(
-              'Title goes here',
+    return MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                SettingsButton(),
+                Text(
+                  'Title goes here',
+                ),
+                ContinueButton(),
+                NewGameButton()
+              ],
             ),
-            ContinueButton(),
-            NewGameButton()
-          ],
-        ),
-      ),
+          ),
+        )
     );
+
   }
 }
