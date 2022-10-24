@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'SummaryAnswers.dart';
+import 'StoryPage.dart';
 
 void main() {
-  runApp(const MyHomePage(title: 'Home Page',));
+  runApp(const StoryPage(title: 'Story Page',));
 }
 
 class SettingsButton extends StatelessWidget
