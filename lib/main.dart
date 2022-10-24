@@ -3,7 +3,7 @@ import 'story_page.dart';
 import 'home_page.dart';
 
 void main() {
-  runApp(const MyHomePage(title: "Home Page"));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "Quiz Master",
-      home: Scaffold(
-      )
+      home: StoryPage(title: "story")
+      // Scaffold()
     );
   }
 }

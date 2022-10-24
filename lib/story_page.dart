@@ -29,7 +29,7 @@ class StoryPage extends StatelessWidget {
               onPressed: (){
 
               },
-              child: Text("Answer 1"),
+              child: const Text("Answer 1"),
             ),
             TextButton( //
               onPressed: (){},
