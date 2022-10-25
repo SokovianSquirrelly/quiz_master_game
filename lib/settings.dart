@@ -44,48 +44,47 @@ class _SettingsState extends State<Settings> {
               decoration: BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(50)),
-              child: Text("SETTINGS",
+              margin: const EdgeInsets.all(40),
+              child: const Text("SETTINGS",
                 style: TextStyle(fontSize: 30, color: Colors.brown, height: 1.8),
                 textAlign: TextAlign.center,),
-              margin: EdgeInsets.all(40),
               // Row is a horizontal, linear layout.
             ),
             Container(
               height: 60.0, // in logical pixels
               width: 120,
-              child: Text("SOUND",
+              decoration: BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("SOUND",
                 style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
                 textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
             ),
             Container(
               height: 60.0, // in logical pixels
               width: 120,
-              child: Text("NIGHT MODE",
+              decoration: const BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("NIGHT MODE",
                 style: TextStyle(fontSize: 27,color: Colors.deepPurple),
                 textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
             ),
             Container(
               height: 60.0, // in logical pixels
               width: 120,
-              child: Text("TIMER",
+              decoration: const BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("TIMER",
                 style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
                 textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
             ),
             Container(
               height: 60.0, // in logical pixels
               width: 120,
-              child: Text("RUMBLE",
+              decoration: const BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("RUMBLE",
                   style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
                   textAlign: TextAlign.center),
-
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
             ),
 
           ],
