@@ -31,6 +31,62 @@ class _SettingsState extends State<Settings> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: 70.0,
+              width: 160,
+              decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(50)),
+              margin: const EdgeInsets.all(40),
+              child: const Text("SETTINGS",
+                style: TextStyle(fontSize: 30, color: Colors.brown, height: 1.8),
+                textAlign: TextAlign.center,),
+              // Row is a horizontal, linear layout.
+            ),
+            Container(
+              height: 60.0, // in logical pixels
+              width: 120,
+              decoration: BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("SOUND",
+                style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
+                textAlign: TextAlign.center,),
+            ),
+            Container(
+              height: 60.0, // in logical pixels
+              width: 120,
+              decoration: const BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("NIGHT MODE",
+                style: TextStyle(fontSize: 27,color: Colors.deepPurple),
+                textAlign: TextAlign.center,),
+            ),
+            Container(
+              height: 60.0, // in logical pixels
+              width: 120,
+              decoration: const BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("TIMER",
+                style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
+                textAlign: TextAlign.center,),
+            ),
+            Container(
+              height: 60.0, // in logical pixels
+              width: 120,
+              decoration: const BoxDecoration(color: Colors.grey),
+              margin: const EdgeInsets.all(30),
+              child: const Text("RUMBLE",
+                  style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
+                  textAlign: TextAlign.center),
       body: Column(
         children: [
           Row(
@@ -81,8 +137,8 @@ class _SettingsState extends State<Settings> {
               ],
             ),
 
-          ),
-        ]
+          ],
+        ),
       ),
     );
   }
