@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'summary_answers.dart';
 
 class StoryPage extends StatelessWidget {
   const StoryPage({super.key, required this.title});
@@ -18,25 +19,43 @@ class StoryPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // SettingsButton(),
+            TextButton( //
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: const Text("Back"),
+            ),
             const Text(
               'Title goes here',
             ),
-            TextButton( //
-              onPressed: (){},
-              child: const Text("This is where the story will be shown and the problem question asked."),
+            const Text( //
+              "This is where the story will be shown and the problem question asked.",
             ),
             TextButton( //
               onPressed: (){
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                );
               },
               child: const Text("Answer 1"),
             ),
             TextButton( //
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                );
+                },
               child: const Text("Answer 2"),
             ),
             TextButton( //
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                );
+              },
               child: const Text("Answer 3"),
             ),
           ],
