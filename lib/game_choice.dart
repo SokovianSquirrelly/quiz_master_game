@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'story_page.dart';
+
 class GameChoice extends StatelessWidget {
   const GameChoice({Key? key}) : super(key: key);
 
@@ -7,10 +9,22 @@ class GameChoice extends StatelessWidget {
     return Container(
       color: Colors.white,
       child :Column(
+
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          TextButton( //
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: const Text("Back"),
+          ),
           TextButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+              );
+            },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade100)
             ),
@@ -21,23 +35,48 @@ class GameChoice extends StatelessWidget {
               children: [
                 const Text('Choose a topic'),
                 TextButton(
-                    onPressed: null,
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                      );
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade100)
                     ),
                     child: const Text('Science'),),
-                const TextButton(
-                  onPressed: null,
-                  child: Text('Math'),),
-                const TextButton(
-                  onPressed: null,
-                  child: Text('Geography'),),
-                const TextButton(
-                  onPressed: null,
-                  child: Text('Spelling'),),
-                const TextButton(
-                  onPressed: null,
-                  child: Text('Programming'),),
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                    );
+                  },
+                  child: const Text('Math'),),
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                    );
+                  },
+                  child: const Text('Geography'),),
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                    );
+                  },
+                  child: const Text('Spelling'),),
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                    );
+                  },
+                  child: const Text('Programming'),),
               ],
 
           ),
@@ -51,6 +90,6 @@ class GameChoice extends StatelessWidget {
   }
 }
 
-void main() => runApp(const MaterialApp(
-  home: GameChoice(),
-));
+// void main() => runApp(const MaterialApp(
+//   home: GameChoice(),
+// ));
