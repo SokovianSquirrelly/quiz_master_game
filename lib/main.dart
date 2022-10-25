@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'story_page.dart';
+import 'summary_answers.dart';
 import 'home_page.dart';
 
 void main() {
@@ -11,9 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Question q = Question();
     return const MaterialApp(
       title: "Quiz Master",
-      home: StoryPage(title: "story")
+      home: SummaryAnswers(index: 0, question: q.question)
       // Scaffold()
     );
   }

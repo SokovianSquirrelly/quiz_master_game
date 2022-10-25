@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SummaryAnswers extends StatelessWidget {
-  const SummaryAnswers({required Key key, required this.index, required this.question}) : super(key: key);
+  // const SummaryAnswers({required Key key, required this.index, required this.question}) : super(key: key);
+  const SummaryAnswers({ super.key, required this.index, required this.question});
 
   final int index;
   final Question question;
@@ -68,9 +69,9 @@ class SummaryAnswers extends StatelessWidget {
 }
 
 class Question {
-  get answers => null;
+  get answers => "temp answers";
 
-  get question => null;
+  get question => "temp question";
 
   isCorrect(answer) {}
 
