@@ -10,32 +10,32 @@ class GameChoice extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextButton(
-            onPressed: null,
-            child: Text('Settings'),
+            onPressed: (){},
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade100)
-            ),),
+            ),
+            child: const Text('Settings')),
 
           Center(
             child: Column(
               children: [
-                Text('Choose a topic'),
+                const Text('Choose a topic'),
                 TextButton(
                     onPressed: null,
-                    child: Text('Science'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade100)
-                    ),),
-                TextButton(
+                    ),
+                    child: const Text('Science'),),
+                const TextButton(
                   onPressed: null,
                   child: Text('Math'),),
-                TextButton(
+                const TextButton(
                   onPressed: null,
                   child: Text('Geography'),),
-                TextButton(
+                const TextButton(
                   onPressed: null,
                   child: Text('Spelling'),),
-                TextButton(
+                const TextButton(
                   onPressed: null,
                   child: Text('Programming'),),
               ],
@@ -51,6 +51,6 @@ class GameChoice extends StatelessWidget {
   }
 }
 
-void main() => runApp(MaterialApp(
+void main() => runApp(const MaterialApp(
   home: GameChoice(),
 ));

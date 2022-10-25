@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'settings.dart';
+import 'story_page.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
@@ -36,7 +38,12 @@ class SettingsButton extends StatelessWidget
   Widget build(BuildContext context)
   {
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
+        );
+      },
       child: const Text("Settings"),
     );
   }
@@ -50,7 +57,12 @@ class ContinueButton extends StatelessWidget
   Widget build(BuildContext context)
   {
     return TextButton(
-      onPressed: (){},
+      onPressed: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+        );
+      },
       child: const Text("Continue"),
     );
   }
@@ -65,7 +77,12 @@ class NewGameButton extends StatelessWidget
   {
     return TextButton
       (
-      onPressed: (){},
+      onPressed: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const StoryPage(title: "New Story")),
+        );
+      },
       child: const Text("New Game"),
     );
   }
