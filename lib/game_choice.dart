@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizmastergame/settings.dart';
 import 'story_page.dart';
 
 class GameChoice extends StatelessWidget {
@@ -23,7 +24,7 @@ class GameChoice extends StatelessWidget {
             onPressed: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                MaterialPageRoute(builder: (context) => const Settings(title: "Settings")),
               );
             },
             child: const Text('Settings')),
