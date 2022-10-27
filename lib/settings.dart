@@ -55,7 +55,7 @@ class _SettingsState extends State<Settings> {
             Container(
               height: 60.0, // in logical pixels
               width: 120,
-              decoration: BoxDecoration(color: Colors.grey),
+              decoration: const BoxDecoration(color: Colors.grey),
               margin: const EdgeInsets.all(30),
               child: const Text("SOUND",
                 style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
