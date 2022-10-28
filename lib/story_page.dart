@@ -18,6 +18,7 @@ class StoryPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset('assets/simplebackground.png'),
             // SettingsButton(),
             TextButton( //
               onPressed: (){
