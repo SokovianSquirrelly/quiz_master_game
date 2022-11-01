@@ -11,6 +11,28 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+          
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              overlayColor: MaterialStateProperty.all<Color>(Colors.black54),
+              padding: MaterialStateProperty.all(EdgeInsets.all(17)),
+              fixedSize: MaterialStateProperty.all(Size.fromWidth(325)),
+              ),
+              ),
+          textTheme: TextTheme(
+            button: TextStyle(
+              fontSize: 30,
+                    ),
+
+                ),
+
+              )
+            ,
+
+
         home: Scaffold(
           body: Center(
             child: Column(
