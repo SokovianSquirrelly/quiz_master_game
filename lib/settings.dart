@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key, required this.title}) : super(key: key);
@@ -89,6 +90,7 @@ class _SettingsState extends State<Settings> {
             ),
             InkWell(
               onTap: (){
+                Vibration.vibrate(duration: 500);
               },
               child: Container(
                 height: 60.0, // in logical pixels
