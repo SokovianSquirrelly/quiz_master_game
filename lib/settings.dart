@@ -29,11 +29,6 @@ class _SettingsState extends State<Settings> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +37,7 @@ class _SettingsState extends State<Settings> {
               height: 70.0,
               width: 160,
               decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(50)),
               child: Text("SETTINGS",
                 style: TextStyle(fontSize: 30, color: Colors.brown, height: 1.8),
@@ -50,42 +45,62 @@ class _SettingsState extends State<Settings> {
               margin: EdgeInsets.all(40),
               // Row is a horizontal, linear layout.
             ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("SOUND",
-                style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
-                textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
+            InkWell(
+              onTap: (){},
+              child: Container(
+                height: 60.0, // in logical pixels
+                width: 120,
+                child: Text("SOUND",
+                  style: TextStyle(fontSize: 25,color: Colors.deepPurple, height: 1.8),
+                  textAlign: TextAlign.center,),
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(50)),
+                margin: EdgeInsets.all(30),
+              ),
             ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("NIGHT MODE",
-                style: TextStyle(fontSize: 27,color: Colors.deepPurple),
-                textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
+            InkWell(
+              onTap: (){},
+              child: Container(
+                height: 60.0, // in logical pixels
+                width: 120,
+                child: Text("NIGHT MODE",
+                  style: TextStyle(fontSize: 25,color: Colors.deepPurple),
+                  textAlign: TextAlign.center,),
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(50)),
+                margin: EdgeInsets.all(30),
+              ),
             ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("TIMER",
-                style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
-                textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
+            InkWell(
+              onTap: (){},
+              child: Container(
+                height: 60.0, // in logical pixels
+                width: 120,
+                child: Text("TIMER",
+                  style: TextStyle(fontSize: 25,color: Colors.deepPurple, height: 1.8),
+                  textAlign: TextAlign.center,),
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(50)),
+                margin: EdgeInsets.all(30),
+              ),
             ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("RUMBLE",
-                  style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
-                  textAlign: TextAlign.center),
-
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
+            InkWell(
+              onTap: (){
+              },
+              child: Container(
+                height: 60.0, // in logical pixels
+                width: 120,
+                child: Text("RUMBLE",
+                    style: TextStyle(fontSize: 25,color: Colors.deepPurple, height: 1.8),
+                    textAlign: TextAlign.center),
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(50)),
+                margin: EdgeInsets.all(30),
+              ),
             ),
 
           ],
