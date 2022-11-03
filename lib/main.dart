@@ -11,8 +11,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: "Quiz Master",
+      // title: "Quiz Master",
       home: MyHomePage(title: "Home Page")
+      // home: Scaffold(
+      //   appBar: AppBar(
+      //     title: const Text("Image from assets"),
+      //   ),
+      //   body: Image.asset('assets/simple-background.png'), //   <-- image
+      // ),
       // Scaffold()
     );
   }
