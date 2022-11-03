@@ -12,56 +12,64 @@ class StoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset('assets/simplebackground.png'),
-            // SettingsButton(),
-            TextButton( //
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              child: const Text("Back"),
-            ),
-            const Text(
-              'Title goes here',
-            ),
-            const Text( //
-              "This is where the story will be shown and the problem question asked.",
-            ),
-            TextButton( //
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
-                );
-              },
-              child: const Text("Answer 1"),
-            ),
-            TextButton( //
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
-                );
-                },
-              child: const Text("Answer 2"),
-            ),
-            TextButton( //
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
-                );
-              },
-              child: const Text("Answer 3"),
-            ),
-          ],
-        ),
+    return Container(
+      constraints: const BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/simple-background.png'),
+            fit: BoxFit.cover),
       ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // Image.asset('assets/simple-background.png'), //   <-- image
+              // SettingsButton(),
+              TextButton( //
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: const Text("Back"),
+              ),
+              const Text(
+                'Title goes here',
+              ),
+              const Text( //
+                "This is where the story will be shown and the problem question asked.",
+              ),
+              TextButton( //
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                  );
+                },
+                child: const Text("Answer 1"),
+              ),
+              TextButton( //
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                  );
+                },
+                child: const Text("Answer 2"),
+              ),
+              TextButton( //
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                  );
+                },
+                child: const Text("Answer 3"),
+              ),
+            ],
+          ),
+        ),
+      )
     );
   }
 }
