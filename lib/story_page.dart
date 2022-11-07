@@ -28,9 +28,9 @@ class StoryPage extends StatelessWidget {
             const Text(
               'Title goes here',
             ),
-            const Text( //
+            Text( //
               "This is where the story will be shown and the problem question asked.",
-            ),
+              style: Theme.of(context).textTheme.headline2),
             TextButton( //
               onPressed: (){
                 Navigator.push(

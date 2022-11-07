@@ -29,67 +29,58 @@ class _SettingsState extends State<Settings> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 70.0,
-              width: 160,
-              decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(50)),
-              child: Text("SETTINGS",
-                style: TextStyle(fontSize: 30, color: Colors.brown, height: 1.8),
-                textAlign: TextAlign.center,),
-              margin: EdgeInsets.all(40),
-              // Row is a horizontal, linear layout.
-            ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("SOUND",
-                style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
-                textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
-            ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("NIGHT MODE",
-                style: TextStyle(fontSize: 27,color: Colors.deepPurple),
-                textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
-            ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("TIMER",
-                style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
-                textAlign: TextAlign.center,),
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
-            ),
-            Container(
-              height: 60.0, // in logical pixels
-              width: 120,
-              child: Text("RUMBLE",
-                  style: TextStyle(fontSize: 27,color: Colors.deepPurple, height: 1.8),
-                  textAlign: TextAlign.center),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              TextButton(onPressed: null, child: Text("Settings",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),),
+                    style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                    )),
+              Padding(padding: EdgeInsets.symmetric(vertical:0 ,horizontal: 10)),
+              TextButton(onPressed: null, child: Text("Back",
+                style: TextStyle(
+                  fontSize: 20,
+                ),),
+                  style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                  )),
+              Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+            ],
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(padding: EdgeInsets.symmetric(vertical: 70,horizontal: 0)),
+                TextButton(
+                  onPressed: null,
+                  child: Text("Sound",),
+                ),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                TextButton(
+                  onPressed: null ,
+                  child: Text("Night Mode",),
+                ),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                TextButton(
+                  onPressed: null,
+                  child: Text("Timer",),
+                ),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                TextButton(
+                  onPressed: null,
+                  child: Text("Rumble",),
+                ),
 
-              decoration: BoxDecoration(color: Colors.grey),
-              margin: EdgeInsets.all(30),
+              ],
             ),
 
-          ],
-        ),
+          ),
+        ]
       ),
     );
   }
