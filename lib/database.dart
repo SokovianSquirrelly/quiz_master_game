@@ -1,67 +1,139 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/widgets.dart';
 
-Future usingDatabase() async {
+Future<Database> useDatabase() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var db = await openDatabase('database.dart');
+  var db = await openDatabase('data.db');
 
-  final database = openDatabase('database.dart',
+  final database = openDatabase('data.db',
   onCreate: (db, version) {
     // Run the CREATE TABLE statement on the database.
     return db.execute(
-      'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY, correct_answers INTEGER, wrong_answers INTEGER, event_id INTEGER);'
+      'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);'
           // 'CREATE TABLE IF NOT EXISTS event(event_id INTEGER);'
-          'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY, question_number INTEGER, question_text STRING, question_subject STRING, event_id INTEGER);'
-          'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY, event_id INTEGER, story_string STRING);'
-          'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY, question_id INTEGER, answer_string STRING);',
+          'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text STRING NOT NULL, question_subject STRING NOT NULL, event_id INTEGER NOT NULL);'
+          'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string STRING NOT NULL);'
+          'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, question_id INTEGER NOT NULL, answer_string STRING NOT NULL);',
     );
 
   },
       version: 1,
   );
 
-  Future<void> insertSave(Save save) async {
+  return database;
+}
+
+Future closeDatabase(database) async {
+  await database.close;
+}
+
+Future<void> insertSave(Save save) async {
     // Get a reference to the database.
-    final db = await database;
+    final db = await useDatabase();
 
     await db.insert(
       'save',
       save.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-  }
-  var save = const Save(
-    save_id: 1,
-    correct_answers: 0,
-    wrong_answers: 0,
-    event_id: 0,
-  );
+    closeDatabase(db);
+}
 
-  Future<List<Save>> saves() async {
-    // Get a reference to the database.
-    final db = await database;
 
-    // Query the table for all The Dogs.
+Future<List<Save>> getSaves(db) async {
+    // Query the table for saves.
     final List<Map<String, dynamic>> maps = await db.query('save');
 
-    // Convert the List<Map<String, dynamic> into a List<Dog>.
+    // Convert the List<Map<String, dynamic> into a List<Save>.
     return List.generate(maps.length, (i) {
       return Save(
         save_id: maps[i]['save_id'],
         correct_answers: maps[i]['correct_answers'],
         wrong_answers: maps[i]['wrong_answers'],
         event_id: maps[i]['event_id'],
+        science_event: 0,
+        math_event: 0,
+        geography_event: 0,
+        spelling_event: 0,
+        programming_event: 0,
       );
     });
+    await closeDatabase(db);
   }
 
-  // print(await saves());
+Future<List<Save>> getEventInfo(db, eventID) async {
+  // Query the table for question associated with an event.
+  final List<Map<String, dynamic>> maps = await db.query('save');
 
-  await insertSave(save);
-
-  await db.close();
+  // Convert the List<Map<String, dynamic> into a List<Dog>.
+  return List.generate(maps.length, (i) {
+    return Save(
+      save_id: maps[i]['save_id'],
+      correct_answers: maps[i]['correct_answers'],
+      wrong_answers: maps[i]['wrong_answers'],
+      event_id: maps[i]['event_id'],
+      science_event: 0,
+      math_event: 0,
+      geography_event: 0,
+      spelling_event: 0,
+      programming_event: 0,
+    );
+  });
+  await closeDatabase(db);
 }
+
+
+
+  // print(await getSaves());
+
+Future<List<String>> getText(subject) async{
+  final db = await useDatabase();
+  List<Save> currSave = await getSaves(db);
+  var result = List.filled(1,"", growable: true);
+  if (subject == "science")
+    {
+      int eventID = currSave[0].science_event;
+    }
+  if (subject == "math")
+  {
+    int eventID = currSave[0].math_event;
+  }
+  if (subject == "geography")
+  {
+    int eventID = currSave[0].geography_event;
+  }
+  if (subject == "spelling")
+  {
+    int eventID = currSave[0].spelling_event;
+  }
+  if (subject == "programming")
+  {
+    int eventID = currSave[0].spelling_event;
+
+  }
+  else
+    {
+      result[0] = "Error retrieving subject information";
+    }
+  return result;
+}
+
+  var save = const Save(
+    save_id: 1,
+    correct_answers: 0,
+    wrong_answers: 0,
+    event_id: 0,
+    science_event: 0,
+    math_event: 0,
+    geography_event: 0,
+    spelling_event: 0,
+    programming_event: 0,
+  );
+  // await insertSave(save);
+  //
+  // await db.close();
+
 
 
 
@@ -70,13 +142,23 @@ class Save {
   final int correct_answers;
   final int wrong_answers;
   final int event_id;
+  final int science_event;
+  final int math_event;
+  final int geography_event;
+  final int spelling_event;
+  final int programming_event;
 
   const Save({
     required this.save_id,
     required this.correct_answers,
     required this.wrong_answers,
     required this.event_id,
-});
+    required this.science_event,
+    required this.math_event,
+    required this.geography_event,
+    required this.spelling_event,
+    required this.programming_event,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -84,12 +166,17 @@ class Save {
       'correct_answers': correct_answers,
       'wrong_answers': wrong_answers,
       'event_id': event_id,
+      'science_complete': science_event,
+      'math_complete': math_event,
+      'geography_complete': geography_event,
+      'spelling_complete': spelling_event,
+      'programming_complete': programming_event,
     };
   }
 
   @override
   String toString() {
-    return 'Save{save_id: $save_id, correct_answers: $correct_answers, wrong_answers: $wrong_answers, event_id: $event_id}';
+    return 'Save{save_id: $save_id, correct_answers: $correct_answers, wrong_answers: $wrong_answers, event_id: $event_id, science_event: $science_event, math_event: $math_event, geography_event: $geography_event, spelling_event: $spelling_event, programming_event: $programming_event}';
   }
 }
 
