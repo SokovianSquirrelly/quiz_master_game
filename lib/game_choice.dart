@@ -12,6 +12,7 @@ class GameChoice extends StatelessWidget {
 
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           TextButton( //
             onPressed: (){
               Navigator.pop(context);
@@ -25,9 +26,6 @@ class GameChoice extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
               );
             },
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade100)
-            ),
             child: const Text('Settings')),
 
           Center(
@@ -41,9 +39,6 @@ class GameChoice extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
                       );
                     },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade100)
-                    ),
                     child: const Text('Science'),),
                 TextButton(
                   onPressed: (){
