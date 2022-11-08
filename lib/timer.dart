@@ -1,14 +1,22 @@
 import 'dart:async';
 
-void main()
-{
-  scheduleTimeout(5 * 1000); // 5 seconds.
-}
+class QuizTimer {
+  Timer? timer;
 
-Timer scheduleTimeout([int milliseconds = 10000]) =>
-    Timer(Duration(milliseconds: milliseconds), handleTimeout);
 
-void handleTimeout()
-{  // callback function
-  // Do some work.
+  QuizTimer()
+  {
+    timer = Timer.periodic(const Duration(seconds: 15),
+            (Timer t) => handleTimeout());
+  }
+
+  handleTimeout()
+  {
+
+  }
+
+  void stopTimer()
+  {
+    timer?.cancel();
+  }
 }
