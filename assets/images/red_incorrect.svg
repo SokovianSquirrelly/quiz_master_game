@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="svg2160"
+   viewBox="0 0 57.507831 57.507809"
+   version="1.0"
+   width="57.507832"
+   height="57.507809"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2162">
+    <radialGradient
+       id="radialGradient2197"
+       gradientUnits="userSpaceOnUse"
+       cy="15.163"
+       cx="15.891"
+       r="27.545">
+      <stop
+         id="stop3145"
+         stop-color="#fff"
+         offset="0" />
+      <stop
+         id="stop3147"
+         stop-color="#00f038"
+         stop-opacity="0"
+         offset="1" />
+    </radialGradient>
+    <radialGradient
+       id="radialGradient2203"
+       gradientUnits="userSpaceOnUse"
+       cy="16.847"
+       cx="16.028"
+       gradientTransform="matrix(0.91888,0.94532,-0.71707,0.69701,13.381,-10.047)"
+       r="27.545">
+      <stop
+         id="stop3203"
+         stop-color="#ff9b9b"
+         offset="0" />
+      <stop
+         id="stop3205"
+         stop-color="#f00000"
+         offset="1" />
+    </radialGradient>
+    <radialGradient
+       xlink:href="#radialGradient2197"
+       id="radialGradient418"
+       gradientUnits="userSpaceOnUse"
+       cx="15.891"
+       cy="15.163"
+       r="27.545" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-67.24579,-3.2459283)">
+    <g
+       id="g2179"
+       transform="translate(0.5,-0.5)" />
+    <g
+       id="g2184"
+       transform="translate(4.4998,-0.5)">
+      <path
+         id="path3185"
+         d="m 55.091,27.727 a 27.5455,27.5455 0 1 1 -55.091,0 27.5455,27.5455 0 1 1 55.091,0 z"
+         style="color:#000000;fill:url(#radialGradient418)"
+         fill="url(#radialGradient2197)"
+         transform="matrix(0.99849,0,0,0.99849,63.996,4.8147)" />
+      <path
+         id="path3187"
+         stroke-linejoin="round"
+         style="color:#000000;fill:url(#radialGradient2203)"
+         d="m 55.091,27.727 a 27.5455,27.5455 0 1 1 -55.091,0 27.5455,27.5455 0 1 1 55.091,0 z"
+         transform="matrix(0.99849,0,0,0.99849,63.996,4.8147)"
+         stroke="#be0000"
+         stroke-linecap="round"
+         stroke-width="2.5038"
+         fill="url(#radialGradient2203)" />
+      <path
+         id="path3207"
+         d="m 95.594,19.312 c -1.798,1.551 -3.145,4.37 -4.532,5.844 -2.631,-2.177 -3.818,-6.236 -6.656,-7.375 -3.44,0.919 -8.904,4.136 -4.875,7.625 2.058,3.043 6.195,5.747 7.157,8.906 -1.468,3.79 -4.292,6.616 -7.032,9.376 1.34,4.675 7.755,0.524 10.344,-1.75 2.065,-4.634 3.568,0.898 5.499,2.891 1.541,6.222 9.801,4.403 10.521,-0.74 -2.84,-4.549 -6.781,-8.924 -9.52,-13.401 1.085,-4.655 5.63,-7.771 6.69,-12.282 -1.79,-3.122 -5.284,0.353 -7.596,0.906 z"
+         style="color:#000000"
+         fill="#ffffff" />
+    </g>
+  </g>
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>red + green OK, not OK Icons</dc:title>
+        <dc:date>2007-11-06T09:00:17</dc:date>
+        <dc:description>Two circular icons in red and green, indicating success or failure. Can be used as visual confirmation.</dc:description>
+        <dc:source>http://openclipart.org/detail/7983/red-+-green-ok-not-ok-icons-by-tzeeniewheenie</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>TzeenieWheenie</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>cancel</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>cross</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>okay</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>svg</rdf:li>
+            <rdf:li>tick</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

@@ -16,7 +16,7 @@ class StoryPage extends StatelessWidget {
       constraints: const BoxConstraints.expand(),
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/simple-background.png'),
+            image: AssetImage('assets/images/simple-background.png'),
             fit: BoxFit.cover),
       ),
       child: Scaffold(
