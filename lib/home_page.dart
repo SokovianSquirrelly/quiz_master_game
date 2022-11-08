@@ -27,18 +27,21 @@ class MyHomePage extends StatelessWidget {
               fontFamily: "Cambria",
                     ),
             headline2: TextStyle(
-              fontSize: 40,
+              fontSize: 30,
               color: Colors.green.shade600,
               fontFamily: "Cambria",
               fontWeight: FontWeight.w500,
-
-            )
-
+            ),
+            headline1: TextStyle(
+            fontSize: 50,
+            color: Colors.green.shade600,
+            fontFamily: "Cambria",
+            fontWeight: FontWeight.w500,
 
                 ),
 
               )
-            ,
+        ),
 
 
         home: Scaffold(

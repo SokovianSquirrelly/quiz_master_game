@@ -55,7 +55,7 @@ class GameChoice extends StatelessWidget {
               children: [
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 Text('Choose a topic',
-                style: Theme.of(context).textTheme.headline2,),
+                style: Theme.of(context).textTheme.headline1,),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
                     onPressed: (){
