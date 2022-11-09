@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'story_page.dart';
 
-class GameChoice extends StatelessWidget {
-  const GameChoice({Key? key}) : super(key: key);
+class GameChoice extends StatefulWidget {
+  const GameChoice({super.key, required this.title});
+  final String title;
+  @override
+  State<GameChoice> createState() => _GameChoiceState();
+}
 
+class _GameChoiceState extends State<GameChoice> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -104,7 +109,7 @@ class GameChoice extends StatelessWidget {
               ],
 
           ),
-            
+
         ),
         ]
       ),

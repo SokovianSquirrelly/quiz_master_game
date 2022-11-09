@@ -59,22 +59,22 @@ class _SettingsState extends State<Settings> {
               children: <Widget>[
                 Padding(padding: EdgeInsets.symmetric(vertical: 70,horizontal: 0)),
                 TextButton(
-                  onPressed: null,
+                  onPressed: (){},
                   child: Text("Sound",),
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
-                  onPressed: null ,
+                  onPressed: (){Theme: ThemeData.dark();} ,
                   child: Text("Night Mode",),
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
-                  onPressed: null,
+                  onPressed: (){},
                   child: Text("Timer",),
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
-                  onPressed: null,
+                  onPressed: (){},
                   child: Text("Rumble",),
                 ),
 

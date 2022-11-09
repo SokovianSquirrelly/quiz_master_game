@@ -99,7 +99,7 @@ class NewGameButton extends StatelessWidget
       onPressed: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GameChoice()),
+          MaterialPageRoute(builder: (context) => const GameChoice(title: "New Game",)),
         );
       },
       child: const Text("New Game"),
