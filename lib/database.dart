@@ -13,10 +13,31 @@ Future<Database> useDatabase() async {
     // Run the CREATE TABLE statement on the database.
     return db.execute(
       'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);'
-          // 'CREATE TABLE IF NOT EXISTS event(event_id INTEGER);'
-          'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text STRING NOT NULL, question_subject STRING NOT NULL, event_id INTEGER NOT NULL);'
-          'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string STRING NOT NULL);'
-          'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string STRING NOT NULL, is_correct TINYINT NOT NULL);',
+          'CREATE TABLE IF NOT EXISTS event(event_id INTEGER PRIMARY KEY NOT NULL);'
+          'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text VARCHAR(255) NOT NULL, question_subject VARCHAR(255) NOT NULL, event_id INTEGER NOT NULL);'
+          'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string VARCHAR(255) NOT NULL);'
+          'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);'
+          'INSERT IGNORE INTO answer (answer_id, event_id, answer_string, is_correct)'
+            'VALUES'
+	          '(1, 1, "a", 1),'
+            '(2, 1, "b", 0),'
+            '(3, 1, "c", 0),'
+            '(4, 2, "d", 1),'
+            '(5, 2, "e", 0),'
+            '(6, 2, "g", 0);'
+    
+          'INSERT IGNORE INTO story (story_id, event_id, story_string)'
+            'VALUES'
+	            '(1, 2, "f");'
+    
+          'INSERT IGNORE INTO event (event_id)'
+            'VALUES'
+	            '(1),'
+              '(2);'
+    
+          'INSERT IGNORE INTO question (question_id, question_number, question_text, question_subject, event_id)'
+            'VALUES'
+	            '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);',
     );
 
   },
@@ -66,13 +87,15 @@ Future<List<Save>> getSaves(db) async {
 
 Future<List<EventText>> getEventInfo(db, eventID) async {
   // Query the table for question associated with an event.
-  final List<Map> maps = await db.rawQuery("SELECT q.question_text, a1.answer_string AS answer1, a2.answer_string AS answer2, a3.answer_string AS answer3, story_text"
-    "FROM event e "
-      "JOIN question q ON e.event_id = q.event_id"
-      "JOIN answer a1 ON e.event_id = a1.event_id"
-      "JOIN answer a2 ON e.event_id = a2.event_id"
-      "JOIN answer a3 ON e.event_id = a3.event_id"
-    "WHERE e.event_id = ? AND a1.isCorrect = 1 AND a2.answer_id < a3.answer_id AND a2.answer_id NOT = a1.answer_id AND a2.answer_id NOT = a1.answer_id;", [eventID]);
+  final List<Map> maps = await db.rawQuery("SELECT ifnull(q.question_text, "0"), ifnull(a1.answer_string,0) AS answer1, ifnull(a2.answer_string,0) AS answer2, ifnull(a3.answer_string, 0) AS answer3, ifnull(s.story_string, "0")"
+  "FROM event e"
+	  "LEFT JOIN question q on q.event_id = e.event_id"
+	  "LEFT JOIN answer a1 ON e.event_id = a1.event_id"
+	  "LEFT JOIN answer a2 ON e.event_id = a2.event_id"
+	  "LEFT JOIN answer a3 ON e.event_id = a3.event_id"
+	  "LEFT JOIN story s ON e.event_id = s.event_id"
+  "WHERE e.event_id = 2 AND a1.is_correct = 1 AND a2.answer_id < a3.answer_id AND NOT a2.answer_id = a1.answer_id AND NOT a2.answer_id = a1.answer_id"
+  "LIMIT 1;", [eventID]);
   // Convert the List<Map<String, dynamic> into a List<EventText>.
   return List.generate(maps.length, (i) {
     return EventText(
