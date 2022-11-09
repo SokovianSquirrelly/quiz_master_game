@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/widgets.dart';
 
@@ -14,7 +16,7 @@ Future<Database> useDatabase() async {
           // 'CREATE TABLE IF NOT EXISTS event(event_id INTEGER);'
           'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text STRING NOT NULL, question_subject STRING NOT NULL, event_id INTEGER NOT NULL);'
           'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string STRING NOT NULL);'
-          'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, question_id INTEGER NOT NULL, answer_string STRING NOT NULL);',
+          'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string STRING NOT NULL, is_correct TINYINT NOT NULL);',
     );
 
   },
@@ -59,64 +61,67 @@ Future<List<Save>> getSaves(db) async {
         programming_event: 0,
       );
     });
-    await closeDatabase(db);
+    
   }
 
-Future<List<Save>> getEventInfo(db, eventID) async {
+Future<List<EventText>> getEventInfo(db, eventID) async {
   // Query the table for question associated with an event.
-  final List<Map<String, dynamic>> maps = await db.query('save');
-
-  // Convert the List<Map<String, dynamic> into a List<Dog>.
+  final List<Map> maps = await db.rawQuery("SELECT q.question_text, a1.answer_string AS answer1, a2.answer_string AS answer2, a3.answer_string AS answer3, story_text"
+    "FROM event e "
+      "JOIN question q ON e.event_id = q.event_id"
+      "JOIN answer a1 ON e.event_id = a1.event_id"
+      "JOIN answer a2 ON e.event_id = a2.event_id"
+      "JOIN answer a3 ON e.event_id = a3.event_id"
+    "WHERE e.event_id = ? AND a1.isCorrect = 1 AND a2.answer_id < a3.answer_id AND a2.answer_id NOT = a1.answer_id AND a2.answer_id NOT = a1.answer_id;", [eventID]);
+  // Convert the List<Map<String, dynamic> into a List<EventText>.
   return List.generate(maps.length, (i) {
-    return Save(
-      save_id: maps[i]['save_id'],
-      correct_answers: maps[i]['correct_answers'],
-      wrong_answers: maps[i]['wrong_answers'],
-      event_id: maps[i]['event_id'],
-      science_event: 0,
-      math_event: 0,
-      geography_event: 0,
-      spelling_event: 0,
-      programming_event: 0,
+    return EventText(
+      question: maps[i]['question_text'],
+      answer1: maps[i]['answer1'],
+      answer2: maps[i]['answer2'],
+      answer3: maps[i]['answer3'],
+      story: maps[i]['story_text'],
     );
   });
-  await closeDatabase(db);
+  
 }
 
 
 
   // print(await getSaves());
 
-Future<List<String>> getText(subject) async{
+Future<List<EventText>> getText(subject) async{
   final db = await useDatabase();
   List<Save> currSave = await getSaves(db);
-  var result = List.filled(1,"", growable: true);
+  List<EventText> eventText = <EventText>[];
   if (subject == "science")
     {
       int eventID = currSave[0].science_event;
+      eventText = await getEventInfo(db, eventID);
     }
-  if (subject == "math")
+  else if (subject == "math")
   {
     int eventID = currSave[0].math_event;
+    eventText = await getEventInfo(db, eventID);
   }
-  if (subject == "geography")
+  else if (subject == "geography")
   {
     int eventID = currSave[0].geography_event;
+    eventText = await getEventInfo(db, eventID);
   }
-  if (subject == "spelling")
+  else if (subject == "spelling")
   {
     int eventID = currSave[0].spelling_event;
+    eventText = await getEventInfo(db, eventID);
   }
-  if (subject == "programming")
+  else if (subject == "programming")
   {
     int eventID = currSave[0].spelling_event;
-
+    eventText = await getEventInfo(db, eventID);
   }
-  else
-    {
-      result[0] = "Error retrieving subject information";
-    }
-  return result;
+    
+  await closeDatabase(db);
+  return eventText;
 }
 
   var save = const Save(
@@ -232,26 +237,29 @@ class Question {
 
 class Answer {
   final int answer_id;
-  final int question_id;
+  final int event_id;
   final String answer_string;
+  final int is_correct;
 
   const Answer({
     required this.answer_id,
-    required this.question_id,
+    required this.event_id,
     required this.answer_string,
+    required this.is_correct,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'answer_id': answer_id,
-      'question_id': question_id,
+      'event_id': event_id,
       'answer_string': answer_string,
+      'is_correct': is_correct,
     };
   }
 
   @override
   String toString() {
-    return 'Answer{answer_id: $answer_id, question_id: $question_id, answer_string: $answer_string}';
+    return 'Answer{answer_id: $answer_id, event_id: $event_id, answer_string: $answer_string}, is_correct $is_correct';
   }
 }
 
@@ -277,5 +285,36 @@ class Story {
   @override
   String toString() {
     return 'Story{save_id: $story_id, event_id: $event_id, story_string: $story_string}';
+  }
+}
+
+class EventText {
+  final String question;
+  final String answer1;
+  final String answer2;
+  final String answer3;  
+  final String story;
+
+  const EventText({
+    required this.question,
+    required this.answer1,
+    required this.answer2,
+    required this.answer3,
+    required this.story,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'question': question,
+      'answer1': answer1,
+      'answer2': answer2,
+      'answer3': answer3,
+      'story': story,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'EventText{question: $question, answer1: $answer1, answer2: $answer2, answer3: $answer3, story: $story}';
   }
 }
