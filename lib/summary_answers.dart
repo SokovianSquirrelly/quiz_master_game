@@ -37,6 +37,13 @@ class SummaryAnswers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 18),
+      constraints: const BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/images/green-correct.png'),
+        // fit: BoxFit.cover
+        ),
+      ),
       child: Column(
         children: <Widget>[
           TextButton( //
