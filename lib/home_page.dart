@@ -12,6 +12,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
+          
           textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
@@ -19,8 +20,8 @@ class MyHomePage extends StatelessWidget {
               overlayColor: MaterialStateProperty.all<Color>(Colors.black54),
               padding: MaterialStateProperty.all(EdgeInsets.all(17)),
               fixedSize: MaterialStateProperty.all(Size.fromWidth(325)),
-            ),
-          ),
+              ),
+              ),
           textTheme: TextTheme(
             button: TextStyle(
               fontSize: 30,
@@ -48,11 +49,13 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class SettingsButton extends StatelessWidget{
+class SettingsButton extends StatelessWidget
+{
   const SettingsButton({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context)
+  {
     return TextButton(
       onPressed: (){
         Navigator.push(
@@ -65,11 +68,13 @@ class SettingsButton extends StatelessWidget{
   }
 }
 
-class ContinueButton extends StatelessWidget{
+class ContinueButton extends StatelessWidget
+{
   const ContinueButton({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context)
+  {
     return TextButton(
       onPressed: (){
         Navigator.push(
@@ -82,11 +87,13 @@ class ContinueButton extends StatelessWidget{
   }
 }
 
-class NewGameButton extends StatelessWidget{
+class NewGameButton extends StatelessWidget
+{
   const NewGameButton({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context)
+  {
     return TextButton
       (
       onPressed: (){
