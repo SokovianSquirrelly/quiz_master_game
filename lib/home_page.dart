@@ -27,9 +27,7 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
         ),
-        darkTheme: ThemeData.dark(
-
-        ),
+        darkTheme: ThemeData.dark(),
         home: Scaffold(
           body: Center(
             child: Column(
