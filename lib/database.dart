@@ -87,7 +87,7 @@ Future<List<Save>> getSaves(db) async {
 
 Future<List<EventText>> getEventInfo(db, eventID) async {
   // Query the table for question associated with an event.
-  final List<Map> maps = await db.rawQuery("SELECT ifnull(q.question_text, "0"), ifnull(a1.answer_string,0) AS answer1, ifnull(a2.answer_string,0) AS answer2, ifnull(a3.answer_string, 0) AS answer3, ifnull(s.story_string, "0")"
+  final List<Map> maps = await db.rawQuery("SELECT ifnull(q.question_text, \"0\"), ifnull(a1.answer_string,0) AS answer1, ifnull(a2.answer_string,0) AS answer2, ifnull(a3.answer_string, 0) AS answer3, ifnull(s.story_string, \"0\")"
   "FROM event e"
 	  "LEFT JOIN question q on q.event_id = e.event_id"
 	  "LEFT JOIN answer a1 ON e.event_id = a1.event_id"
