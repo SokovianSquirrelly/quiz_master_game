@@ -1,8 +1,11 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/widgets.dart';
 
+// Database use functions
 Future<Database> useDatabase() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -51,7 +54,7 @@ Future closeDatabase(database) async {
   await database.close;
 }
 
-Future<void> insertSave(Save save) async {
+Future insertSave(Save save) async {
     // Get a reference to the database.
     final db = await useDatabase();
 
@@ -63,6 +66,42 @@ Future<void> insertSave(Save save) async {
     closeDatabase(db);
 }
 
+// Functions to use from the application
+Future<int> updateSave() async {
+  final db = await useDatabase();
+  List<Save> saves = await getSaves(db);
+  Save save = saves[0];
+  if (save.event_id == save.science_event)
+  {
+    save.science_event += 1;
+  }
+  else if (save.event_id == save.math_event)
+  {
+    save.math_event += 1;
+  }
+  else if (save.event_id == save.geography_event)
+  {
+    save.geography_event += 1;
+  }
+  else if (save.event_id == save.programming_event)
+  {
+    save.programming_event += 1;
+  }
+  else if (save.event_id == save.spelling_event)
+  {
+    save.spelling_event += 1;
+  }
+  save.event_id += 1;
+
+  await db.update(
+    'save',
+    save.toMap(),
+    where: 'id = ?',
+    whereArgs: [save.save_id],
+  );
+  await closeDatabase(db);
+  return save.event_id;
+}
 
 Future<List<Save>> getSaves(db) async {
     // Query the table for saves.
@@ -75,11 +114,11 @@ Future<List<Save>> getSaves(db) async {
         correct_answers: maps[i]['correct_answers'],
         wrong_answers: maps[i]['wrong_answers'],
         event_id: maps[i]['event_id'],
-        science_event: 0,
-        math_event: 0,
-        geography_event: 0,
-        spelling_event: 0,
-        programming_event: 0,
+        science_event: maps[i]['science_event'],
+        math_event: maps[i]['math_event'],
+        geography_event: maps[i]['geography_event'],
+        spelling_event: maps[i]['spelling_event'],
+        programming_event: maps[i]['programming_event'],
       );
     });
     
@@ -94,7 +133,7 @@ Future<List<EventText>> getEventInfo(db, eventID) async {
 	  "LEFT JOIN answer a2 ON e.event_id = a2.event_id"
 	  "LEFT JOIN answer a3 ON e.event_id = a3.event_id"
 	  "LEFT JOIN story s ON e.event_id = s.event_id"
-  "WHERE e.event_id = 2 AND a1.is_correct = 1 AND a2.answer_id < a3.answer_id AND NOT a2.answer_id = a1.answer_id AND NOT a2.answer_id = a1.answer_id"
+  "WHERE e.event_id = ? AND a1.is_correct = 1 AND a2.answer_id < a3.answer_id AND NOT a2.answer_id = a1.answer_id AND NOT a2.answer_id = a1.answer_id"
   "LIMIT 1;", [eventID]);
   // Convert the List<Map<String, dynamic> into a List<EventText>.
   return List.generate(maps.length, (i) {
@@ -109,74 +148,66 @@ Future<List<EventText>> getEventInfo(db, eventID) async {
   
 }
 
-
-
-  // print(await getSaves());
-
-Future<List<EventText>> getText(subject) async{
+Future<EventText> getText(subject) async{
   final db = await useDatabase();
   List<Save> currSave = await getSaves(db);
   List<EventText> eventText = <EventText>[];
+  int eventID =  currSave[0].event_id;
   if (subject == "science")
     {
-      int eventID = currSave[0].science_event;
+      eventID = currSave[0].science_event;
       eventText = await getEventInfo(db, eventID);
     }
   else if (subject == "math")
   {
-    int eventID = currSave[0].math_event;
+    eventID = currSave[0].math_event;
     eventText = await getEventInfo(db, eventID);
   }
   else if (subject == "geography")
   {
-    int eventID = currSave[0].geography_event;
+    eventID = currSave[0].geography_event;
     eventText = await getEventInfo(db, eventID);
   }
   else if (subject == "spelling")
   {
-    int eventID = currSave[0].spelling_event;
+    eventID = currSave[0].spelling_event;
     eventText = await getEventInfo(db, eventID);
   }
   else if (subject == "programming")
   {
-    int eventID = currSave[0].spelling_event;
+    eventID = currSave[0].programming_event;
     eventText = await getEventInfo(db, eventID);
   }
+  else if (subject == "continue")
+  {
+    eventText = await getEventInfo(db, eventID);
+  }
+  Save save = currSave[0];
+  save.event_id = eventID;
+  await db.update(
+    'save',
+    save.toMap(),
+    where: 'id = ?',
+    whereArgs: [save.save_id],
+  );
     
   await closeDatabase(db);
-  return eventText;
+  return eventText[0];
 }
 
-  var save = const Save(
-    save_id: 1,
-    correct_answers: 0,
-    wrong_answers: 0,
-    event_id: 0,
-    science_event: 0,
-    math_event: 0,
-    geography_event: 0,
-    spelling_event: 0,
-    programming_event: 0,
-  );
-  // await insertSave(save);
-  //
-  // await db.close();
-
-
-
-
+// Table Classes
 class Save {
   final int save_id;
   final int correct_answers;
   final int wrong_answers;
-  final int event_id;
-  final int science_event;
-  final int math_event;
-  final int geography_event;
-  final int spelling_event;
-  final int programming_event;
+  int event_id;
+  int science_event;
+  int math_event;
+  int geography_event;
+  int spelling_event;
+  int programming_event;
 
-  const Save({
+  Save({
     required this.save_id,
     required this.correct_answers,
     required this.wrong_answers,
