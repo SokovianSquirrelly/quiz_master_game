@@ -1,4 +1,4 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
@@ -40,7 +40,7 @@ class _SettingsState extends State<Settings> {
                     fontSize: 20,
                   ),),
                     style: ButtonStyle(
-                        // fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                        fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
                     )),
               Padding(padding: EdgeInsets.symmetric(vertical:0 ,horizontal: 10)),
               TextButton(onPressed: null, child: Text("Back",
@@ -48,7 +48,7 @@ class _SettingsState extends State<Settings> {
                   fontSize: 20,
                 ),),
                   style: ButtonStyle(
-                      // fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                      fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
                   )),
               Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
             ],
