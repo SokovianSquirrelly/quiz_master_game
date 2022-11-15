@@ -186,7 +186,11 @@ Future<Database> useDatabase() async {
     
           'INSERT IGNORE INTO question (question_id, question_number, question_text, question_subject, event_id)'
             'VALUES'
-	            '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);',
+	            '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
+
+          'INSERT IGNORE INTO save (save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
+            'VALUES'
+              '(1, 0, 0, 1, 1, 21, 41, 61, 81)'
     );
 
   },
