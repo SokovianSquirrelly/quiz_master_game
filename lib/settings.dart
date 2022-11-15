@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key, required this.title}) : super(key: key);
@@ -74,13 +75,13 @@ class _SettingsState extends State<Settings> {
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Vibration.vibrate(duration: 1000, amplitude: 128);
+                  },
                   child: Text("Rumble",),
                 ),
-
               ],
             ),
-
           ),
         ]
       ),
