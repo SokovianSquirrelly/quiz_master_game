@@ -12,7 +12,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          
           textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
@@ -45,7 +44,6 @@ class MyHomePage extends StatelessWidget {
           ),
         )
     );
-
   }
 }
 
@@ -99,7 +97,7 @@ class NewGameButton extends StatelessWidget
       onPressed: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const GameChoice(title: "New Game",)),
+          MaterialPageRoute(builder: (context) => const GameChoice()),
         );
       },
       child: const Text("New Game"),

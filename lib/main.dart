@@ -11,11 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      title: "Quiz Master",
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: "Home Page")
+        title: "Quiz Master",
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(title: "Home Page")
       // Scaffold()
     );
   }

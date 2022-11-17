@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:quizmastergame/timer.dart';
 import 'package:vibration/vibration.dart';
 
 class Settings extends StatefulWidget {
@@ -16,6 +15,19 @@ class Settings extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  IconData _iconLight = Icons.wb_sunny;
+  IconData _iconDark = Icons.nights_stay;
+
+  ThemeData _lightTheme = ThemeData(
+    primarySwatch: Colors.amber,
+    brightness: Brightness.light
+  );
+
+  ThemeData _darkTheme = ThemeData(
+    primarySwatch: Colors.red,
+    brightness: Brightness.dark
+  )
+
 
   @override
   State<Settings> createState() => _SettingsState();
@@ -25,65 +37,67 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       body: Column(
-        children: [
-          Row(
-            children: [
-              TextButton(onPressed: null, child: Text("Settings",
+          children: [
+            Row(
+              children: [
+                TextButton(onPressed: null, child: Text("Settings",
                   style: TextStyle(
                     fontSize: 20,
                   ),),
                     style: ButtonStyle(
-                        // fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                        fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
                     )),
-              Padding(padding: EdgeInsets.symmetric(vertical:0 ,horizontal: 10)),
-              TextButton(onPressed: null, child: Text("Back",
-                style: TextStyle(
-                  fontSize: 20,
-                ),),
-                  style: ButtonStyle(
-                      // fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
-                  )),
-              Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-            ],
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.symmetric(vertical: 70,horizontal: 0)),
-                TextButton(
-                  onPressed: (){},
-                  child: Text("Sound",),
-                ),
+                Padding(padding: EdgeInsets.symmetric(vertical:0 ,horizontal: 10)),
+                TextButton(onPressed: null, child: Text("Back",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),),
+                    style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                    )),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                TextButton(
-                  onPressed: (){Theme: ThemeData.dark();} ,
-                  child: Text("Night Mode",),
-                ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                TextButton(
-                  onPressed: (){},
-                  child: Text("Timer",),
-                ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                TextButton(
-                  onPressed: (){
-                    Vibration.vibrate(duration: 1000, amplitude: 128);
-                  },
-                  child: Text("Rumble",),
-                ),
               ],
             ),
-          ),
-        ]
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.symmetric(vertical: 70,horizontal: 0)),
+                  TextButton(
+                    onPressed: null,
+                    child: Text("Sound",),
+                  ),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                  TextButton(
+                    onPressed: (){
+                      setState(() {
+                        _iconBool = !_iconBool;
+                      });
+                    } ,
+                    child: Text("Night Mode",),
+                  ),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                  TextButton(
+                    onPressed: (){
+
+                    },
+                    child: Text("Timer",),
+                  ),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                  TextButton(
+                    onPressed: (){
+                      Vibration.vibrate(duration: 1000, amplitude: 128);
+                    },
+                    child: Text("Rumble",),
+                  ),
+
+                ],
+              ),
+
+            ),
+          ]
       ),
     );
   }
