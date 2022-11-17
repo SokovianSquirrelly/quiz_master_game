@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quizmastergame/settings.dart';
 import 'story_page.dart';
 
 class GameChoice extends StatelessWidget {
@@ -13,26 +12,51 @@ class GameChoice extends StatelessWidget {
 
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              TextButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
 
-          TextButton( //
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            child: const Text("Back"),
+                    );
+                  },
+
+                  child: const Text('Settings',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),),
+                  style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                  )
+              ),
+              Padding(padding: EdgeInsets.symmetric(vertical:0 ,horizontal: 10)),
+              TextButton( //
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: const Text("Back",
+                  style: TextStyle(
+                      fontSize: 20,
+                  ),),
+                  style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+                  )
+              ),
+
+
+            ],
           ),
-          TextButton(
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Settings(title: "Settings")),
-              );
-            },
-            child: const Text('Settings')),
+
 
           Center(
             child: Column(
               children: [
-                const Text('Choose a topic'),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                Text('Choose a topic',
+                style: Theme.of(context).textTheme.headline1,),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
                     onPressed: (){
                       Navigator.push(
@@ -41,6 +65,7 @@ class GameChoice extends StatelessWidget {
                       );
                     },
                     child: const Text('Science'),),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
                   onPressed: (){
                     Navigator.push(
@@ -49,6 +74,7 @@ class GameChoice extends StatelessWidget {
                     );
                   },
                   child: const Text('Math'),),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
                   onPressed: (){
                     Navigator.push(
@@ -57,6 +83,7 @@ class GameChoice extends StatelessWidget {
                     );
                   },
                   child: const Text('Geography'),),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
                   onPressed: (){
                     Navigator.push(
@@ -65,6 +92,7 @@ class GameChoice extends StatelessWidget {
                     );
                   },
                   child: const Text('Spelling'),),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 TextButton(
                   onPressed: (){
                     Navigator.push(

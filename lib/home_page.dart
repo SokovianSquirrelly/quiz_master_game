@@ -12,41 +12,67 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          
           textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
               foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-              overlayColor: MaterialStateProperty.all<Color>(Colors.black54),
-              padding: MaterialStateProperty.all(EdgeInsets.all(17)),
+              overlayColor: MaterialStateProperty.all<Color>(Colors.green.shade600),
+              padding: MaterialStateProperty.all(EdgeInsets.all(15)),
               fixedSize: MaterialStateProperty.all(Size.fromWidth(325)),
               ),
               ),
           textTheme: TextTheme(
             button: TextStyle(
               fontSize: 30,
+              fontFamily: "Cambria",
                     ),
+            headline2: TextStyle(
+              fontSize: 30,
+              color: Colors.green.shade600,
+              fontFamily: "Cambria",
+              fontWeight: FontWeight.w500,
+            ),
+            headline1: TextStyle(
+            fontSize: 50,
+            color: Colors.green.shade600,
+            fontFamily: "Cambria",
+            fontWeight: FontWeight.w500,
 
                 ),
 
               )
-            ,
-
-
+        ),
+        darkTheme: ThemeData.dark(),
         home: Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                SettingsButton(),
-                Text(
-                  'Title goes here',
+
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children:[
+              Row(
+                children: [SettingsButton(),
+                ],
+              ),
+              Center(
+                child: Column(
+                  children: const <Widget>[
+                    Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
+                    Text(
+                      'Quiz Master',
+                      style: TextStyle(
+                        fontSize: 70,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                    ContinueButton(),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                    NewGameButton()
+                  ],
                 ),
-                ContinueButton(),
-                NewGameButton()
-              ],
-            ),
-          ),
+              ),
+            ]
+        )
         )
     );
 
@@ -65,9 +91,16 @@ class SettingsButton extends StatelessWidget
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
+
         );
       },
-      child: const Text("Settings"),
+      style: ButtonStyle(
+        fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+      ),
+      child: const Text("Settings",
+      style: TextStyle(
+        fontSize: 20,
+      ),),
     );
   }
 }
