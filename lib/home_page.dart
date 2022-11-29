@@ -3,20 +3,6 @@ import 'package:quizmastergame/game_choice.dart';
 import 'settings.dart';
 import 'story_page.dart';
 
-
-bool iconBool = false;
-
-ThemeData lightTheme = ThemeData(
-    primarySwatch: Colors.amber,
-    brightness: Brightness.light
-);
-
-ThemeData darkTheme = ThemeData(
-    primarySwatch: Colors.red,
-    brightness: Brightness.dark
-);
-
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -24,34 +10,55 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: iconBool ? darkTheme : lightTheme,
-        darkTheme: ThemeData.dark(),
-        home: Scaffold(
-          appBar: AppBar(
-            actions: [
-              IconButton(onPressed: (){
-                setState(){
-                  iconBool = !iconBool;
-                }
-              }, icon: Icon(iconBool? Icons.wb_sunny : Icons.nights_stay )
-              )
-            ],),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                SettingsButton(),
-                Text(
-                  'Title goes here',
-                ),
-                ContinueButton(),
-                NewGameButton()
-              ],
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.green.shade600,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.settings),
+              tooltip: 'Settings',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
+                );
+              },
             ),
-          ),
+          ],
+        ),
+
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children:[
+              // Row(
+              //   children: const [SettingsButton(),
+              //   ],
+              // ),
+              Center(
+                child: Column(
+                  children: const <Widget>[
+                    Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
+                    Text(
+                      'Quiz Master',
+                      style: TextStyle(
+                        fontSize: 70,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                    ContinueButton(),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                    NewGameButton()
+                  ],
+                ),
+              ),
+            ]
         )
     );
+
   }
 }
 
@@ -67,9 +74,16 @@ class SettingsButton extends StatelessWidget
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
+
         );
       },
-      child: const Text("Settings"),
+      style: ButtonStyle(
+          fixedSize: MaterialStateProperty.all(const Size.fromWidth(125))
+      ),
+      child: const Text("Settings",
+        style: TextStyle(
+          fontSize: 20,
+        ),),
     );
   }
 }
