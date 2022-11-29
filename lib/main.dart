@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'settings.dart';
@@ -43,7 +45,44 @@ class MyApp extends StatelessWidget {
 
             )
         ),
-        darkTheme: ThemeData.dark(),
+        darkTheme: ThemeData(
+            appBarTheme: AppBarTheme(
+              iconTheme: IconThemeData(
+                color: Colors.black
+              ),
+
+            ),
+            scaffoldBackgroundColor: Colors.blueGrey,
+            textButtonTheme: TextButtonThemeData(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+                overlayColor: MaterialStateProperty.all<Color>(Colors.grey),
+                padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
+                fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
+              ),
+            ),
+            textTheme: TextTheme(
+              button: const TextStyle(
+                fontSize: 30,
+                fontFamily: "Cambria",
+              ),
+              headline2: TextStyle(
+                fontSize: 30,
+                color: Colors.grey,
+                fontFamily: "Cambria",
+                fontWeight: FontWeight.w500,
+              ),
+              headline1: TextStyle(
+                fontSize: 50,
+                color: Colors.grey,
+                fontFamily: "Cambria",
+                fontWeight: FontWeight.w500,
+
+              ),
+
+            )
+        ),
         title: "Quiz Master",
         debugShowCheckedModeBanner: false,
         home: const Scaffold(
