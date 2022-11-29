@@ -3,6 +3,20 @@ import 'package:quizmastergame/game_choice.dart';
 import 'settings.dart';
 import 'story_page.dart';
 
+
+bool iconBool = false;
+
+ThemeData lightTheme = ThemeData(
+    primarySwatch: Colors.amber,
+    brightness: Brightness.light
+);
+
+ThemeData darkTheme = ThemeData(
+    primarySwatch: Colors.red,
+    brightness: Brightness.dark
+);
+
+
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -11,24 +25,18 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          textButtonTheme: TextButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-              overlayColor: MaterialStateProperty.all<Color>(Colors.black54),
-              padding: MaterialStateProperty.all(EdgeInsets.all(17)),
-              fixedSize: MaterialStateProperty.all(Size.fromWidth(325)),
-              ),
-              ),
-          textTheme: TextTheme(
-            button: TextStyle(
-              fontSize: 30,
-            ),
-          ),
-        ),
+        theme: iconBool ? darkTheme : lightTheme,
         darkTheme: ThemeData.dark(),
         home: Scaffold(
+          appBar: AppBar(
+            actions: [
+              IconButton(onPressed: (){
+                setState(){
+                  iconBool = !iconBool;
+                }
+              }, icon: Icon(iconBool? Icons.wb_sunny : Icons.nights_stay )
+              )
+            ],),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

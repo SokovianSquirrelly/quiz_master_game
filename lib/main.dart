@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "Quiz Master",
+        theme: iconBool ? darkTheme : lightTheme,
         debugShowCheckedModeBanner: false,
         home: MyHomePage(title: "Home Page")
       // Scaffold()
