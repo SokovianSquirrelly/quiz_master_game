@@ -10,70 +10,53 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          textButtonTheme: TextButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-              overlayColor: MaterialStateProperty.all<Color>(Colors.green.shade600),
-              padding: MaterialStateProperty.all(EdgeInsets.all(15)),
-              fixedSize: MaterialStateProperty.all(Size.fromWidth(325)),
-              ),
-              ),
-          textTheme: TextTheme(
-            button: TextStyle(
-              fontSize: 30,
-              fontFamily: "Cambria",
-                    ),
-            headline2: TextStyle(
-              fontSize: 30,
-              color: Colors.green.shade600,
-              fontFamily: "Cambria",
-              fontWeight: FontWeight.w500,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.green.shade600,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Settings',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
+              );
+            },
+          ),
+        ],
+      ),
+
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children:[
+          // Row(
+          //   children: const [SettingsButton(),
+          //   ],
+          // ),
+          Center(
+            child: Column(
+              children: const <Widget>[
+                Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
+                Text(
+                  'Quiz Master',
+                  style: TextStyle(
+                    fontSize: 70,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                ContinueButton(),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                NewGameButton()
+              ],
             ),
-            headline1: TextStyle(
-            fontSize: 50,
-            color: Colors.green.shade600,
-            fontFamily: "Cambria",
-            fontWeight: FontWeight.w500,
-
-                ),
-
-              )
-        ),
-        darkTheme: ThemeData.dark(),
-        home: Scaffold(
-
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children:[
-              Row(
-                children: [SettingsButton(),
-                ],
-              ),
-              Center(
-                child: Column(
-                  children: const <Widget>[
-                    Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
-                    Text(
-                      'Quiz Master',
-                      style: TextStyle(
-                        fontSize: 70,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
-                      ),
-                    ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                    ContinueButton(),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                    NewGameButton()
-                  ],
-                ),
-              ),
-            ]
-        )
-        )
+          ),
+        ]
+      )
     );
 
   }
@@ -95,7 +78,7 @@ class SettingsButton extends StatelessWidget
         );
       },
       style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
+        fixedSize: MaterialStateProperty.all(const Size.fromWidth(125))
       ),
       child: const Text("Settings",
       style: TextStyle(

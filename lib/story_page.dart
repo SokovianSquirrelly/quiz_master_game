@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'summary_answers.dart';
+import 'home_page.dart';
+import 'settings.dart';
 
 class StoryPage extends StatelessWidget {
   const StoryPage({super.key, required this.title});
@@ -20,105 +22,93 @@ class StoryPage extends StatelessWidget {
             fit: BoxFit.cover),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Image.asset('assets/simple-background.png'), //   <-- image
-              // SettingsButton(),
-              TextButton( //
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                child: const Text("Back"),
-              ),
-              const Text(
-                'Title goes here',
-              ),
-              const Text( //
-                "This is where the story will be shown and the problem question asked.",
-              ),
-              TextButton( //
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
-                  );
-                },
-                child: const Text("Answer 1"),
-              ),
-              TextButton( //
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
-                  );
-                },
-                child: const Text("Answer 2"),
-              ),
-              TextButton( //
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
-                  );
-                },
-                child: const Text("Answer 3"),
-              ),
-            ],
-          ),
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          backgroundColor: Colors.green.shade600,
+          title: Text(title),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.settings),
+              tooltip: 'Settings',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.home),
+              tooltip: 'Home',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Home Page')),
+                );
+              },
+            ),
+          ],
         ),
-      )
-    return Scaffold(
-
-
-      body: Column(
+        body: Column(
         children: [
-          Row(
-            children: [
-              TextButton(onPressed: null, child: Text("Settings",
-                style: TextStyle(
-                  fontSize: 20,
-                ),),
-                  style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
-                  )),
-              Padding(padding: EdgeInsets.symmetric(vertical:0 ,horizontal: 10)),
-              TextButton(onPressed: null, child: Text("Back",
-                style: TextStyle(
-                  fontSize: 20,
-                ),),
-                  style: ButtonStyle(
-                      fixedSize: MaterialStateProperty.all(Size.fromWidth(125))
-                  )),
-              Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     TextButton(
+          //         onPressed: null,
+          //         style: ButtonStyle(
+          //             fixedSize: MaterialStateProperty.all(const Size.fromWidth(125))
+          //         ),
+          //         child: const Text("Settings",
+          //           style: TextStyle(
+          //           fontSize: 20,
+          //           ),
+          //         )
+          //     ),
+          //     const Padding(padding: EdgeInsets.symmetric(vertical:0 ,horizontal: 10)),
+          //     TextButton(
+          //         onPressed: null,
+          //         style: ButtonStyle(
+          //         fixedSize: MaterialStateProperty.all(const Size.fromWidth(125))
+          //         ),
+          //         child: const Text("Back",
+          //           style: TextStyle(
+          //             fontSize: 20,
+          //           ),
+          //         )
+          //     ),
+          //     const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+          //   ],
+          // ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // SettingsButton(),
-                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+
                 Text(
                   "Title goes here",
-                    style: Theme.of(context).textTheme.headline1,),
-                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+
                 Text( //
-                    "This is where the story will be shown and the problem question asked.",
-                    style: Theme.of(context).textTheme.headline2),
-                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                  "This is where the story will be shown and the problem question asked.",
+                  style: Theme.of(context).textTheme.headline2
+                ),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+
                 TextButton( //
                   onPressed: (){
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                    context,
+                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
                     );
                   },
                   child: const Text("Answer 1"),
                 ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+
                 TextButton( //
                   onPressed: (){
                     Navigator.push(
@@ -128,24 +118,23 @@ class StoryPage extends StatelessWidget {
                   },
                   child: const Text("Answer 2"),
                 ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
 
                 TextButton( //
                   onPressed: (){
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
+                    context,
+                    MaterialPageRoute(builder: (context) => const SummaryAnswers(index: 0)),
                     );
                   },
                   child: const Text("Answer 3"),
                 ),
-
               ],
             ),
           ),
-        ],
+          ],
+        )
       )
-
     );
   }
 }
