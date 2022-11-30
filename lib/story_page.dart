@@ -22,6 +22,7 @@ class StoryPage extends StatelessWidget {
             fit: BoxFit.cover),
       ),
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           automaticallyImplyLeading: true,
           backgroundColor: Colors.green.shade600,
@@ -91,7 +92,6 @@ class StoryPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-
                 Text( //
                   "This is where the story will be shown and the problem question asked.",
                   style: Theme.of(context).textTheme.headline2
