@@ -29,19 +29,21 @@ class MyApp extends StatelessWidget {
             button: const TextStyle(
               fontSize: 30,
               fontFamily: "Cambria",
+              // shadows: [Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 5),],
             ),
             headline2: TextStyle(
               fontSize: 30,
               color: Colors.green.shade600,
               fontFamily: "Cambria",
               fontWeight: FontWeight.w500,
+              shadows: const [Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 7),],
             ),
             headline1: TextStyle(
               fontSize: 50,
               color: Colors.green.shade600,
               fontFamily: "Cambria",
               fontWeight: FontWeight.w500,
-
+              shadows: const [Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 7),],
             ),
 
           )

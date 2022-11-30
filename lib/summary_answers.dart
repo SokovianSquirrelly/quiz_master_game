@@ -5,9 +5,11 @@ import 'story_page.dart';
 
 class SummaryAnswers extends StatelessWidget {
   // const SummaryAnswers({required Key key, required this.index, required this.question}) : super(key: key);
-  const SummaryAnswers({ super.key, required this.index});
+  const SummaryAnswers({ super.key, required this.index, required this.answer, required this.correct});
 
   final int index;
+  final String answer;
+  final bool correct;
   final String title = "Answers";
   // final Question question;
 
@@ -108,7 +110,7 @@ class SummaryAnswers extends StatelessWidget {
               onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                  MaterialPageRoute(builder: (context) => const StoryPage(subject: "Old Story")),
                 );
               },
               child: const Text("Next"),
