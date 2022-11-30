@@ -99,7 +99,7 @@ class ContinueButton extends StatelessWidget
       onPressed: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+          MaterialPageRoute(builder: (context) => const StoryPage(subject: "continue")),
         );
       },
       child: const Text("Continue"),
