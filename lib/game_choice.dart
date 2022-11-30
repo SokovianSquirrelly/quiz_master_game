@@ -96,7 +96,7 @@ class GameChoice extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                          MaterialPageRoute(builder: (context) => const StoryPage(subject: "Old Story")),
                         );
                       },
                       child: const Text('Science'),),
@@ -105,7 +105,7 @@ class GameChoice extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                          MaterialPageRoute(builder: (context) => const StoryPage(subject: "Old Story")),
                         );
                       },
                       child: const Text('Math'),),
@@ -114,7 +114,7 @@ class GameChoice extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                          MaterialPageRoute(builder: (context) => const StoryPage(subject: "Old Story")),
                         );
                       },
                       child: const Text('Geography'),),
@@ -123,7 +123,7 @@ class GameChoice extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                          MaterialPageRoute(builder: (context) => const StoryPage(subject: "Old Story")),
                         );
                       },
                       child: const Text('Spelling'),),
@@ -132,7 +132,7 @@ class GameChoice extends StatelessWidget {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                          MaterialPageRoute(builder: (context) => const StoryPage(subject: "Old Story")),
                         );
                       },
                       child: const Text('Programming'),),

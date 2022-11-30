@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:flutter/widgets.dart';
 
 /* 
-Use this file to intereact with the database.
+Use this file to interact with the database.
 Import the file to the file needing to access
 the classes or function contained within like
 import 'database.dart'
