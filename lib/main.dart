@@ -13,13 +13,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
+          canvasColor: Colors.white,
           textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent), //.black38
               foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
               overlayColor: MaterialStateProperty.all<Color>(Colors.green.shade600),
               padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
               fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
+              elevation: MaterialStateProperty.all(1),
+              shadowColor: MaterialStateProperty.all<Color>(Colors.black38),
             ),
           ),
           textTheme: TextTheme(
