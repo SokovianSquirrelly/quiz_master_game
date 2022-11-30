@@ -42,12 +42,12 @@ class SummaryAnswers extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 18),
       constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage('assets/images/green-correct.png'),
-        // fit: BoxFit.cover
-        ),
-      ),
+      // decoration: const BoxDecoration(
+      //   image: DecorationImage(
+      //   image: AssetImage('assets/images/green-correct.png'),
+      //   // fit: BoxFit.cover
+      //   ),
+      // ),
       child: Scaffold(
         appBar: AppBar(
           title: Text(title),
@@ -100,6 +100,10 @@ class SummaryAnswers extends StatelessWidget {
                     )),
               ],
             ),
+
+            const Image(image: AssetImage('assets/images/green-correct.png'),),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+
             TextButton( //
               onPressed: (){
                 Navigator.push(
