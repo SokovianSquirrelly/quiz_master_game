@@ -30,9 +30,12 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   vibration: ^1.7.5
-
+  shared_preferences: ^2.0.15
+  provider: ^6.0.4
   flutter:
     sdk: flutter
+
+  sqflite:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -71,6 +74,8 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+  assets:
+    - assets/images/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
