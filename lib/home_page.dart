@@ -14,7 +14,6 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.green.shade600,
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.settings),
@@ -45,7 +44,6 @@ class MyHomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 70,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
                       ),
                     ),
                     Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),

@@ -36,7 +36,6 @@ class _SettingsState extends State<Settings> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
-        backgroundColor: Colors.green.shade600,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.home),

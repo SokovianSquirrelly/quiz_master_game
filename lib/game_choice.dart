@@ -20,7 +20,6 @@ class GameChoice extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          backgroundColor: Colors.green.shade600,
           title: const Text("Choose Game"),
           actions: <Widget>[
             IconButton(

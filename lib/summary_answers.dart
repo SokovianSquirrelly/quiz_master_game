@@ -62,7 +62,6 @@ class SummaryAnswers extends StatelessWidget {
               );
             },
           ),
-          backgroundColor: Colors.green.shade600,
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.settings),

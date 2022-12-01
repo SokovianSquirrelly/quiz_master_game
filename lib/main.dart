@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'settings.dart';
@@ -15,6 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.green.shade600,
+            ),
             textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
@@ -47,22 +48,25 @@ class MyApp extends StatelessWidget {
         ),
         darkTheme: ThemeData(
             appBarTheme: AppBarTheme(
+              backgroundColor: Colors.grey,
               iconTheme: IconThemeData(
                 color: Colors.black
+
               ),
 
             ),
-            scaffoldBackgroundColor: Colors.blueGrey,
+            scaffoldBackgroundColor: Colors.black26,
             textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                 overlayColor: MaterialStateProperty.all<Color>(Colors.grey),
                 padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
                 fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
               ),
             ),
             textTheme: TextTheme(
+
               button: const TextStyle(
                 fontSize: 30,
                 fontFamily: "Cambria",

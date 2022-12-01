@@ -24,7 +24,6 @@ class StoryPage extends StatelessWidget {
         child: Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: true,
-              backgroundColor: Colors.green.shade600,
               title: Text(title),
               actions: <Widget>[
                 IconButton(
