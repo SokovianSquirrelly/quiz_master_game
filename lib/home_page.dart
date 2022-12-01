@@ -44,6 +44,7 @@ class MyHomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 70,
                         fontWeight: FontWeight.bold,
+                        color: Colors.brown
                       ),
                     ),
                     Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
