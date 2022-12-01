@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
 
 /* 
 Use this file to intereact with the database.
@@ -32,6 +33,7 @@ and any story text associated. The first answer
 returned will always be the correct answer for
 the question.
 */
+
 // Functions for external use
 Future updateSave() async {
   final db = await useDatabase();
@@ -155,9 +157,11 @@ class EventText {
 Future<Database> useDatabase() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var db = await openDatabase('data.db');
+  // join(await getDatabasesPath(), 'data.db');
+  //
+  // var db = await openDatabase('data.db');
 
-  final database = openDatabase('data.db',
+  final database = openDatabase(join(await getDatabasesPath(), 'data.db'),
   onCreate: (db, version) {
     // Run the CREATE TABLE statement on the database.
     return db.execute(
@@ -174,7 +178,8 @@ Future<Database> useDatabase() async {
             '(4, 2, "d", 1),'
             '(5, 2, "e", 0),'
             '(6, 2, "g", 0);'
-    
+
+
           'INSERT IGNORE INTO story (story_id, event_id, story_string)'
             'VALUES'
 	            '(1, 2, "f");'
