@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quizmastergame/dark_mode.dart';
 import 'package:quizmastergame/game_choice.dart';
 import 'settings.dart';
 import 'story_page.dart';
@@ -9,55 +11,69 @@ class MyHomePage extends StatelessWidget {
   final String title;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          automaticallyImplyLeading: false,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.settings),
-              tooltip: 'Settings',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
-                );
-              },
-            ),
-          ],
-        ),
-
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children:[
-              // Row(
-              //   children: const [SettingsButton(),
-              //   ],
-              // ),
-              Center(
-                child: Column(
-                  children: const <Widget>[
-                    Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
-                    Text(
-                      'Quiz Master',
-                      style: TextStyle(
-                        fontSize: 70,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.brown
-                      ),
-                    ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                    ContinueButton(),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                    NewGameButton()
-                  ],
+  Consumer<ThemeModel> build(BuildContext context){
+    return Consumer(
+      builder: (context, ThemeModel themeNotifier, child){
+        return Scaffold(
+            appBar: AppBar(
+              title: Text(title),
+              automaticallyImplyLeading: false,
+              actions: <Widget>[
+                IconButton(
+                    onPressed: (){
+                      themeNotifier.isDark
+                          ? themeNotifier.isDark = false
+                          : themeNotifier.isDark = true;
+                    },
+                    icon: Icon(
+                        themeNotifier.isDark
+                            ? Icons.sunny : Icons.nightlight_round
+                    )
                 ),
-              ),
-            ]
-        )
-    );
+                IconButton(
+                  icon: const Icon(Icons.settings),
+                  tooltip: 'Settings',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Settings(title: 'Settings')),
+                    );
+                  },
+                ),
+              ],
+            ),
 
+            body: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children:[
+                  // Row(
+                  //   children: const [SettingsButton(),
+                  //   ],
+                  // ),
+                  Center(
+                    child: Column(
+                      children: const <Widget>[
+                        Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
+                        Text(
+                          'Quiz Master',
+                          style: TextStyle(
+                              fontSize: 70,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.brown
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                        ContinueButton(),
+                        Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                        NewGameButton()
+                      ],
+                    ),
+                  ),
+                ]
+            )
+        );
+      }
+    );
   }
 }
 
