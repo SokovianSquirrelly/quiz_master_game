@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
 
 /* 
 Use this file to intereact with the database.
@@ -155,47 +156,101 @@ class EventText {
 Future<Database> useDatabase() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var db = await openDatabase('data.db');
+  // Get a location using getDatabasesPath
+  var databasesPath = await getDatabasesPath();
+  String path = join(databasesPath, 'data.db');
 
-  final database = openDatabase('data.db',
-  onCreate: (db, version) {
-    // Run the CREATE TABLE statement on the database.
-    return db.execute(
-      'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);'
-          'CREATE TABLE IF NOT EXISTS event(event_id INTEGER PRIMARY KEY NOT NULL);'
-          'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text VARCHAR(255) NOT NULL, question_subject VARCHAR(255) NOT NULL, event_id INTEGER NOT NULL);'
-          'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string VARCHAR(255) NOT NULL);'
-          'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);'
-          'INSERT IGNORE INTO answer (answer_id, event_id, answer_string, is_correct)'
-            'VALUES'
-	          '(1, 1, "a", 1),'
-            '(2, 1, "b", 0),'
-            '(3, 1, "c", 0),'
-            '(4, 2, "d", 1),'
-            '(5, 2, "e", 0),'
-            '(6, 2, "g", 0);'
-    
-          'INSERT IGNORE INTO story (story_id, event_id, story_string)'
-            'VALUES'
-	            '(1, 2, "f");'
-    
-          'INSERT IGNORE INTO event (event_id)'
-            'VALUES'
-	            '(1),'
-              '(2);'
-    
-          'INSERT IGNORE INTO question (question_id, question_number, question_text, question_subject, event_id)'
-            'VALUES'
-	            '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
+  // Delete the database
+  await deleteDatabase(path);
 
-          'INSERT IGNORE INTO save (save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
-            'VALUES'
-              '(1, 0, 0, 1, 1, 21, 41, 61, 81)'
+  // var db = await openDatabase('data.db');
+
+  // open the database
+  Database database = await openDatabase(path, version: 1,
+      onCreate: (Database db, int version) async {
+        // When creating the db, create the table
+        await db.execute('CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);');
+        await db.execute('CREATE TABLE IF NOT EXISTS event(event_id INTEGER PRIMARY KEY NOT NULL);');
+        await db.execute('CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text VARCHAR(255) NOT NULL, question_subject VARCHAR(255) NOT NULL, event_id INTEGER NOT NULL);');
+        await db.execute('CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string VARCHAR(255) NOT NULL);');
+        await db.execute('CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);');
+      });
+  await database.transaction((txn) async {
+    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO answer(answer_id, event_id, answer_string, is_correct)'
+          'VALUES'
+          '(1, 1, "a", 1),'
+          '(2, 1, "b", 0),'
+          '(3, 1, "c", 0),'
+          '(4, 2, "d", 1),'
+          '(5, 2, "e", 0),'
+          '(6, 2, "g", 0);'
     );
-
-  },
-      version: 1,
-  );
+  });
+  await database.transaction((txn) async {
+    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO story(story_id, event_id, story_string)'
+          'VALUES'
+          '(1, 2, "f");'
+    );
+  });
+  await database.transaction((txn) async {
+    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO event(event_id)'
+          'VALUES'
+          '(1),'
+          '(2);'
+    );
+  });
+  await database.transaction((txn) async {
+    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO question(question_id, question_number, question_text, question_subject, event_id)'
+          'VALUES'
+          '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
+    );
+  });
+  await database.transaction((txn) async {
+    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO save(save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
+          'VALUES'
+          '(1, 0, 0, 1, 1, 21, 41, 61, 81)'
+    );
+  });
+  //
+  // final database = openDatabase('data.db',
+  // onCreate: (db, version) {
+    // Run the CREATE TABLE statement on the database.
+  //   return db.execute(
+  //     'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);'
+  //         'CREATE TABLE IF NOT EXISTS event(event_id INTEGER PRIMARY KEY NOT NULL);'
+  //         'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text VARCHAR(255) NOT NULL, question_subject VARCHAR(255) NOT NULL, event_id INTEGER NOT NULL);'
+  //         'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string VARCHAR(255) NOT NULL);'
+  //         'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);'
+  //         'INSERT IGNORE INTO answer (answer_id, event_id, answer_string, is_correct)'
+  //           'VALUES'
+	//           '(1, 1, "a", 1),'
+  //           '(2, 1, "b", 0),'
+  //           '(3, 1, "c", 0),'
+  //           '(4, 2, "d", 1),'
+  //           '(5, 2, "e", 0),'
+  //           '(6, 2, "g", 0);'
+  //
+  //         'INSERT IGNORE INTO story (story_id, event_id, story_string)'
+  //           'VALUES'
+	//             '(1, 2, "f");'
+  //
+  //         'INSERT IGNORE INTO event (event_id)'
+  //           'VALUES'
+	//             '(1),'
+  //             '(2);'
+  //
+  //         'INSERT IGNORE INTO question (question_id, question_number, question_text, question_subject, event_id)'
+  //           'VALUES'
+	//             '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
+  //
+  //         'INSERT IGNORE INTO save (save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
+  //           'VALUES'
+  //             '(1, 0, 0, 1, 1, 21, 41, 61, 81)'
+  //   );
+  //
+  // },
+  //     version: 1,
+  // );
 
   return database;
 }
@@ -239,7 +294,7 @@ Future<List<Save>> getSaves(db) async {
 
 Future<List<EventText>> getEventInfo(db, eventID) async {
   // Query the table for question associated with an event.
-  final List<Map> maps = await db.rawQuery("SELECT ifnull(q.question_text, \"0\"), ifnull(a1.answer_string,0) AS answer1, ifnull(a2.answer_string,0) AS answer2, ifnull(a3.answer_string, 0) AS answer3, ifnull(s.story_string, \"0\")"
+  final List<Map> maps = await db.rawQuery("SELECT TOP 1 ifnull(q.question_text, \"0\"), ifnull(a1.answer_string,0) AS answer1, ifnull(a2.answer_string,0) AS answer2, ifnull(a3.answer_string, 0) AS answer3, ifnull(s.story_string, \"0\")"
   "FROM event e"
 	  "LEFT JOIN question q on q.event_id = e.event_id"
 	  "LEFT JOIN answer a1 ON e.event_id = a1.event_id"
@@ -247,7 +302,7 @@ Future<List<EventText>> getEventInfo(db, eventID) async {
 	  "LEFT JOIN answer a3 ON e.event_id = a3.event_id"
 	  "LEFT JOIN story s ON e.event_id = s.event_id"
   "WHERE e.event_id = ? AND a1.is_correct = 1 AND a2.answer_id < a3.answer_id AND NOT a2.answer_id = a1.answer_id AND NOT a2.answer_id = a1.answer_id"
-  "LIMIT 1;", [eventID]);
+  ";", [eventID]);
   // Convert the List<Map<String, dynamic> into a List<EventText>.
   return List.generate(maps.length, (i) {
     return EventText(
