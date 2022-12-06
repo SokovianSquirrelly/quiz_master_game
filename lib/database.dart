@@ -35,10 +35,15 @@ the question.
 */
 
 // Functions for external use
-Future updateSave() async {
+Future<int> updateSave(correct) async {
   final db = await useDatabase();
   List<Save> saves = await getSaves(db);
   Save save = saves[0];
+  if (correct) {
+    save.correct_answers += 1;
+  } else {
+    save.wrong_answers += 1;
+  }
   if (save.event_id == save.science_event) {
     save.science_event += 1;
   } else if (save.event_id == save.math_event) {
@@ -58,7 +63,7 @@ Future updateSave() async {
     where: 'save_id = ?',
     whereArgs: [save.save_id],
   );
-  await closeDatabase(db);
+  return save.correct_answers;
 }
 
 Future<EventText> getText(subject) async {
@@ -897,8 +902,8 @@ Future<EventText> getEventInfo(db, eventID) async {
 // Table Classes
 class Save {
   final int save_id;
-  final int correct_answers;
-  final int wrong_answers;
+  int correct_answers;
+  int wrong_answers;
   int event_id;
   int science_event;
   int math_event;
