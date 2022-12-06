@@ -49,9 +49,9 @@ class _StoryPageState extends State<StoryPage> {
       order[2] = 0;
     }
     var answers = ["", "", ""];
-    answers[order[0]] = "Answer 1";
-    answers[order[1]] = "Answer 2";
-    answers[order[2]] = "Answer 3";
+    answers[order[0]] = text.answer1;
+    answers[order[1]] = text.answer2;
+    answers[order[2]] = text.answer3;
 
     return Column(children: <Widget>[
       TextButton(
@@ -160,7 +160,7 @@ class _StoryPageState extends State<StoryPage> {
                 builder: (context, AsyncSnapshot<EventText> snapshot) {
                   if (snapshot.hasData) {
                     // return Text(snapshot.data);
-                    // text = snapshot.data!;
+                    text = snapshot.data!;
                     return Column(
                       children: [
                         Center(
@@ -173,7 +173,7 @@ class _StoryPageState extends State<StoryPage> {
                                       vertical: 15, horizontal: 0)),
 
                               Text(
-                                "Title goes here",
+                                widget.subject,//"Title goes here",
                                 style: Theme.of(context).textTheme.headline1,
                               ),
                               const Padding(
@@ -181,11 +181,19 @@ class _StoryPageState extends State<StoryPage> {
                                       vertical: 15, horizontal: 0)),
                               Text(
                                   //
-                                  "This is where the story will be shown and the problem question asked.",
+                                  text.story,//"This is where the story will be shown and the problem question asked.",
                                   style: Theme.of(context).textTheme.headline2),
                               const Padding(
                                   padding: EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 0)),
+
+                              Text(
+                              //
+                              text.question,//"This is where the story will be shown and the problem question asked.",
+                              style: Theme.of(context).textTheme.headline2),
+                              const Padding(
+                              padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 0)),
 
                               Text(text.toString(),
                                   style: Theme.of(context).textTheme.headline2),
