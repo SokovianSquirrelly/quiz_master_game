@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class _CountdownTimer extends State {
+class QuizTimer extends State {
   Timer? countdownTimer;
   Duration duration = const Duration(seconds: 15);
   bool timeOut = false;
 
+  @override
   void initState()
   {
     super.initState();
@@ -46,23 +47,13 @@ class _CountdownTimer extends State {
   Widget build(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
     final seconds = strDigits(duration.inSeconds);
-    return Scaffold(
-        body: Center(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          Text(
+    startTimer();
+    return Text(
             seconds,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
-              fontSize: 50),
-            ),
-            const SizedBox(height: 20)
-        ]
-      )
-    ));
+              fontSize: 20),
+            );
   }
 }

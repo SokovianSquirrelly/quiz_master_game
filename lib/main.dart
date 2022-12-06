@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'timer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
+
+  var timer = QuizTimer();
 
   @override
   Widget build(BuildContext context) {
+    // return MaterialApp(home: Scaffold(body: timer.build(context),),);
     return MaterialApp(
         theme: ThemeData(
           canvasColor: Colors.white,
