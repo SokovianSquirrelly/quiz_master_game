@@ -6,12 +6,12 @@ import 'database.dart';
 import 'home_page.dart';
 import 'settings.dart';
 import 'summary_answers.dart';
+import 'timer.dart';
 
 class StoryPage extends StatefulWidget {
   const StoryPage({super.key, required this.subject});
 
   final String subject;
-
   @override
   State<StoryPage> createState() => _StoryPageState();
 }
@@ -57,13 +57,20 @@ class _StoryPageState extends State<StoryPage> {
       TextButton(
         //
         onPressed: () {
+          var correct = false;
+          int score = 0;
+          if (answers[0] == text.answer1){
+            correct = true;
+          }
+          updateSave();
           Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => SummaryAnswers(
-                      index: 0,
-                      answer: text.toString(),
-                      correct: true,
+                      subject: widget.subject,
+                      score: score,
+                      answer: text.answer1,
+                      correct: correct,
                     )),
           );
         },
@@ -73,13 +80,20 @@ class _StoryPageState extends State<StoryPage> {
       TextButton(
         //
         onPressed: () {
+          var correct = false;
+          int score = 0;
+          if (answers[1] == text.answer1){
+            correct = true;
+          }
+          updateSave();
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const SummaryAnswers(
-                      index: 0,
-                      answer: '',
-                      correct: true,
+                builder: (context) => SummaryAnswers(
+                      subject: widget.subject,
+                      score: score,
+                      answer: text.answer1,
+                      correct: correct,
                     )),
           );
         },
@@ -89,13 +103,20 @@ class _StoryPageState extends State<StoryPage> {
       TextButton(
         //
         onPressed: () {
+          var correct = false;
+          int score = 0;
+          if (answers[2] == text.answer1){
+            correct = true;
+          }
+          updateSave();
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const SummaryAnswers(
-                      index: 0,
-                      answer: '',
-                      correct: true,
+                builder: (context) => SummaryAnswers(
+                      subject: widget.subject,
+                      score: score,
+                      answer: text.answer1,
+                      correct: correct,
                     )),
           );
         },
@@ -114,6 +135,9 @@ class _StoryPageState extends State<StoryPage> {
     //   text = textEvent;
     //   return text;
     // });
+
+    var timer = QuizTimer();
+    timer.startTimer();
 
     return Container(
         constraints: const BoxConstraints.expand(),
@@ -172,6 +196,15 @@ class _StoryPageState extends State<StoryPage> {
                                   padding: EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 0)),
 
+                              SizedBox(
+                                width: 25,
+                                height: 25,
+                                child: timer.build(context),
+                              ),
+                              const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 0)),
+
                               Text(
                                 widget.subject,//"Title goes here",
                                 style: Theme.of(context).textTheme.headline1,
@@ -195,11 +228,11 @@ class _StoryPageState extends State<StoryPage> {
                               padding: EdgeInsets.symmetric(
                               vertical: 15, horizontal: 0)),
 
-                              Text(text.toString(),
-                                  style: Theme.of(context).textTheme.headline2),
-                              const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 0)),
+                              // Text(text.toString(),
+                              //     style: Theme.of(context).textTheme.headline2),
+                              // const Padding(
+                              //     padding: EdgeInsets.symmetric(
+                              //         vertical: 15, horizontal: 0)),
                               questions(context, text),
                             ],
                           ),
