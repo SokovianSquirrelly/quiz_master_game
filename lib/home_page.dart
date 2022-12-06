@@ -39,7 +39,6 @@ class MyHomePage extends StatelessWidget {
           Center(
             child: Column(
               children: const <Widget>[
-                Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
                 Text(
                   'Quiz Master',
                   style: TextStyle(

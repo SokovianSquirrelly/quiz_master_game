@@ -77,38 +77,28 @@ class SummaryAnswers extends StatelessWidget {
           ],
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 4.0),
-                  child: CircleAvatar(
-                    backgroundColor: circleAvatarBackground,
-                    radius: circleAvatarRadius,
-                    child: Text(
-                      '$index',
-                      style: questionStyle,
-                    ),
-                  ),
-                ),
-                const Expanded(
-                    flex: 4,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("question"), //'${question.question}',
-                      // style: questionStyle, textAlign: TextAlign.center),
-                    )),
-              ],
+            Center(
+              child: Column(
+                        children:[
+                          Text("question",
+                            style: Theme.of(context).textTheme.headline1,
+                            ), //'${question.question}',
+                          const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                          TextButton( //
+                            onPressed: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
+                              );
+                            },
+                            child: const Text("Next"),
+                          ),
+                      ]
+              ),
             ),
-            TextButton( //
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
-                );
-              },
-              child: const Text("Next"),
-            ),
+
             // Column(children: _buildAnswers(question)),
           ],
         ),
