@@ -38,24 +38,15 @@ Future updateSave() async {
   final db = await useDatabase();
   List<Save> saves = await getSaves(db);
   Save save = saves[0];
-  if (save.event_id == save.science_event)
-  {
+  if (save.event_id == save.science_event) {
     save.science_event += 1;
-  }
-  else if (save.event_id == save.math_event)
-  {
+  } else if (save.event_id == save.math_event) {
     save.math_event += 1;
-  }
-  else if (save.event_id == save.geography_event)
-  {
+  } else if (save.event_id == save.geography_event) {
     save.geography_event += 1;
-  }
-  else if (save.event_id == save.programming_event)
-  {
+  } else if (save.event_id == save.programming_event) {
     save.programming_event += 1;
-  }
-  else if (save.event_id == save.spelling_event)
-  {
+  } else if (save.event_id == save.spelling_event) {
     save.spelling_event += 1;
   }
   save.event_id += 1;
@@ -63,44 +54,34 @@ Future updateSave() async {
   await db.update(
     'save',
     save.toMap(),
-    where: 'id = ?',
+    where: 'save_id = ?',
     whereArgs: [save.save_id],
   );
   await closeDatabase(db);
 }
 
-Future<EventText> getText(subject) async{
+Future<EventText> getText(subject) async {
   final db = await useDatabase();
   List<Save> currSave = await getSaves(db);
-  List<EventText> eventText = <EventText>[];
-  int eventID =  currSave[0].event_id;
-  if (subject == "science")
-    {
-      eventID = currSave[0].science_event;
-      eventText = await getEventInfo(db, eventID);
-    }
-  else if (subject == "math")
-  {
+  var eventText = new EventText(
+      question: "a", answer1: "a", answer2: "a", answer3: "a", story: "a");
+  int eventID = currSave[0].event_id;
+  if (subject == "science") {
+    eventID = currSave[0].science_event;
+    eventText = await getEventInfo(db, eventID);
+  } else if (subject == "math") {
     eventID = currSave[0].math_event;
     eventText = await getEventInfo(db, eventID);
-  }
-  else if (subject == "geography")
-  {
+  } else if (subject == "geography") {
     eventID = currSave[0].geography_event;
     eventText = await getEventInfo(db, eventID);
-  }
-  else if (subject == "spelling")
-  {
+  } else if (subject == "spelling") {
     eventID = currSave[0].spelling_event;
     eventText = await getEventInfo(db, eventID);
-  }
-  else if (subject == "programming")
-  {
+  } else if (subject == "programming") {
     eventID = currSave[0].programming_event;
     eventText = await getEventInfo(db, eventID);
-  }
-  else if (subject == "continue")
-  {
+  } else if (subject == "continue") {
     eventText = await getEventInfo(db, eventID);
   }
   Save save = currSave[0];
@@ -108,12 +89,12 @@ Future<EventText> getText(subject) async{
   await db.update(
     'save',
     save.toMap(),
-    where: 'id = ?',
+    where: 'save_id = ?',
     whereArgs: [save.save_id],
   );
-    
+
   await closeDatabase(db);
-  return eventText[0];
+  return eventText;
 }
 
 // EventText Class, not associated with a
@@ -124,7 +105,7 @@ class EventText {
   final String question;
   final String answer1;
   final String answer2;
-  final String answer3;  
+  final String answer3;
   final String story;
 
   const EventText({
@@ -151,7 +132,6 @@ class EventText {
   }
 }
 
-
 // Functions for internal use
 Future<Database> useDatabase() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -168,53 +148,58 @@ Future<Database> useDatabase() async {
   // open the database
   Database database = await openDatabase(path, version: 1,
       onCreate: (Database db, int version) async {
-        // When creating the db, create the table
-        await db.execute('CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);');
-        await db.execute('CREATE TABLE IF NOT EXISTS event(event_id INTEGER PRIMARY KEY NOT NULL);');
-        await db.execute('CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text VARCHAR(255) NOT NULL, question_subject VARCHAR(255) NOT NULL, event_id INTEGER NOT NULL);');
-        await db.execute('CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string VARCHAR(255) NOT NULL);');
-        await db.execute('CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);');
-      });
-  await database.transaction((txn) async {
-    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO answer(answer_id, event_id, answer_string, is_correct)'
-          'VALUES'
-          '(1, 1, "a", 1),'
-          '(2, 1, "b", 0),'
-          '(3, 1, "c", 0),'
-          '(4, 2, "d", 1),'
-          '(5, 2, "e", 0),'
-          '(6, 2, "g", 0);'
-    );
+    // When creating the db, create the table
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);');
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS events(event_id INTEGER PRIMARY KEY NOT NULL);');
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text VARCHAR(255) NOT NULL, question_subject VARCHAR(255) NOT NULL, event_id INTEGER NOT NULL);');
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string VARCHAR(255) NOT NULL);');
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);');
   });
   await database.transaction((txn) async {
-    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO story(story_id, event_id, story_string)'
-          'VALUES'
-          '(1, 2, "f");'
-    );
+    int id1 = await txn.rawInsert(
+        'INSERT OR IGNORE INTO answer(answer_id, event_id, answer_string, is_correct)'
+        'VALUES'
+        '(1, 1, "a", 1),'
+        '(2, 1, "b", 0),'
+        '(3, 1, "c", 0),'
+        '(4, 2, "d", 1),'
+        '(5, 2, "e", 0),'
+        '(6, 2, "g", 0);');
   });
   await database.transaction((txn) async {
-    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO event(event_id)'
-          'VALUES'
-          '(1),'
-          '(2);'
-    );
+    int id1 = await txn.rawInsert(
+        'INSERT OR IGNORE INTO story(story_id, event_id, story_string)'
+        'VALUES'
+        '(1, 1, "f"),'
+        '(2, 2, "f");');
   });
   await database.transaction((txn) async {
-    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO question(question_id, question_number, question_text, question_subject, event_id)'
-          'VALUES'
-          '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
-    );
+    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO events(event_id)'
+        'VALUES'
+        '(1),'
+        '(2);');
   });
   await database.transaction((txn) async {
-    int id1 = await txn.rawInsert('INSERT OR IGNORE INTO save(save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
-          'VALUES'
-          '(1, 0, 0, 1, 1, 21, 41, 61, 81)'
-    );
+    int id1 = await txn.rawInsert(
+        'INSERT OR IGNORE INTO question(question_id, question_number, question_text, question_subject, event_id)'
+        'VALUES'
+        '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);');
+  });
+  await database.transaction((txn) async {
+    int id1 = await txn.rawInsert(
+        'INSERT OR IGNORE INTO save(save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
+        'VALUES'
+        '(1, 0, 0, 1, 1, 21, 41, 61, 81)');
   });
   //
   // final database = openDatabase('data.db',
   // onCreate: (db, version) {
-    // Run the CREATE TABLE statement on the database.
+  // Run the CREATE TABLE statement on the database.
   //   return db.execute(
   //     'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);'
   //         'CREATE TABLE IF NOT EXISTS event(event_id INTEGER PRIMARY KEY NOT NULL);'
@@ -223,7 +208,7 @@ Future<Database> useDatabase() async {
   //         'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);'
   //         'INSERT IGNORE INTO answer (answer_id, event_id, answer_string, is_correct)'
   //           'VALUES'
-	//           '(1, 1, "a", 1),'
+  //           '(1, 1, "a", 1),'
   //           '(2, 1, "b", 0),'
   //           '(3, 1, "c", 0),'
   //           '(4, 2, "d", 1),'
@@ -232,16 +217,16 @@ Future<Database> useDatabase() async {
   //
   //         'INSERT IGNORE INTO story (story_id, event_id, story_string)'
   //           'VALUES'
-	//             '(1, 2, "f");'
+  //             '(1, 2, "f");'
   //
   //         'INSERT IGNORE INTO event (event_id)'
   //           'VALUES'
-	//             '(1),'
+  //             '(1),'
   //             '(2);'
   //
   //         'INSERT IGNORE INTO question (question_id, question_number, question_text, question_subject, event_id)'
   //           'VALUES'
-	//             '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
+  //             '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
   //
   //         'INSERT IGNORE INTO save (save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
   //           'VALUES'
@@ -260,62 +245,62 @@ Future closeDatabase(database) async {
 }
 
 Future insertSave(Save save) async {
-    // Get a reference to the database.
-    final db = await useDatabase();
+  // Get a reference to the database.
+  final db = await useDatabase();
 
-    await db.insert(
-      'save',
-      save.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-    closeDatabase(db);
+  await db.insert(
+    'save',
+    save.toMap(),
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
+  closeDatabase(db);
 }
 
 Future<List<Save>> getSaves(db) async {
-    // Query the table for saves.
-    final List<Map<String, dynamic>> maps = await db.query('save');
+  // Query the table for saves.
+  final List<Map<String, dynamic>> maps = await db.query('save');
 
-    // Convert the List<Map<String, dynamic> into a List<Save>.
-    return List.generate(maps.length, (i) {
-      return Save(
-        save_id: maps[i]['save_id'],
-        correct_answers: maps[i]['correct_answers'],
-        wrong_answers: maps[i]['wrong_answers'],
-        event_id: maps[i]['event_id'],
-        science_event: maps[i]['science_event'],
-        math_event: maps[i]['math_event'],
-        geography_event: maps[i]['geography_event'],
-        spelling_event: maps[i]['spelling_event'],
-        programming_event: maps[i]['programming_event'],
-      );
-    });
-    
-  }
-
-Future<List<EventText>> getEventInfo(db, eventID) async {
-  // Query the table for question associated with an event.
-  final List<Map> maps = await db.rawQuery("SELECT TOP 1 ifnull(q.question_text, \"0\"), ifnull(a1.answer_string,0) AS answer1, ifnull(a2.answer_string,0) AS answer2, ifnull(a3.answer_string, 0) AS answer3, ifnull(s.story_string, \"0\")"
-  "FROM event e"
-	  "LEFT JOIN question q on q.event_id = e.event_id"
-	  "LEFT JOIN answer a1 ON e.event_id = a1.event_id"
-	  "LEFT JOIN answer a2 ON e.event_id = a2.event_id"
-	  "LEFT JOIN answer a3 ON e.event_id = a3.event_id"
-	  "LEFT JOIN story s ON e.event_id = s.event_id"
-  "WHERE e.event_id = ? AND a1.is_correct = 1 AND a2.answer_id < a3.answer_id AND NOT a2.answer_id = a1.answer_id AND NOT a2.answer_id = a1.answer_id"
-  ";", [eventID]);
-  // Convert the List<Map<String, dynamic> into a List<EventText>.
+  // Convert the List<Map<String, dynamic> into a List<Save>.
   return List.generate(maps.length, (i) {
-    return EventText(
-      question: maps[i]['question_text'],
-      answer1: maps[i]['answer1'],
-      answer2: maps[i]['answer2'],
-      answer3: maps[i]['answer3'],
-      story: maps[i]['story_text'],
+    return Save(
+      save_id: maps[i]['save_id'],
+      correct_answers: maps[i]['correct_answers'],
+      wrong_answers: maps[i]['wrong_answers'],
+      event_id: maps[i]['event_id'],
+      science_event: maps[i]['science_event'],
+      math_event: maps[i]['math_event'],
+      geography_event: maps[i]['geography_event'],
+      spelling_event: maps[i]['spelling_event'],
+      programming_event: maps[i]['programming_event'],
     );
   });
-  
 }
 
+Future<EventText> getEventInfo(db, eventID) async {
+  // Query the table for question associated with an event.
+  final List<Map> maps = await db.rawQuery(
+      "SELECT q.question_text, a1.answer_string AS answer1, a2.answer_string AS answer2, a3.answer_string AS answer3, s.story_string " +
+          "FROM events e " +
+          "LEFT JOIN question q on q.event_id = e.event_id " +
+          "LEFT JOIN answer a1 ON e.event_id = a1.event_id " +
+          "LEFT JOIN answer a2 ON e.event_id = a2.event_id " +
+          "LEFT JOIN answer a3 ON e.event_id = a3.event_id " +
+          "LEFT JOIN story s ON e.event_id = s.event_id " +
+          "WHERE e.event_id = ? AND a1.is_correct = 1 AND a2.answer_id < a3.answer_id AND NOT a2.answer_id = a1.answer_id AND NOT a2.answer_id = a1.answer_id" +
+          ";",
+      [eventID]);
+  // Convert the List<Map<String, dynamic> into a List<EventText>.
+  var eventList = List.generate(maps.length, (i) {
+    return EventText(
+      question: maps[0]['question_text'],
+      answer1: maps[0]['answer1'],
+      answer2: maps[0]['answer2'],
+      answer3: maps[0]['answer3'],
+      story: maps[0]['story_string'],
+    );
+  });
+  return eventList[0];
+}
 
 // Table Classes
 class Save {
@@ -347,11 +332,11 @@ class Save {
       'correct_answers': correct_answers,
       'wrong_answers': wrong_answers,
       'event_id': event_id,
-      'science_complete': science_event,
-      'math_complete': math_event,
-      'geography_complete': geography_event,
-      'spelling_complete': spelling_event,
-      'programming_complete': programming_event,
+      'science_event': science_event,
+      'math_event': math_event,
+      'geography_event': geography_event,
+      'spelling_event': spelling_event,
+      'programming_event': programming_event,
     };
   }
 
@@ -361,10 +346,10 @@ class Save {
   }
 }
 
-class Event {
+class Events {
   final int event_id;
 
-  const Event({
+  const Events({
     required this.event_id,
   });
 
@@ -463,4 +448,3 @@ class Story {
     return 'Story{save_id: $story_id, event_id: $event_id, story_string: $story_string}';
   }
 }
-

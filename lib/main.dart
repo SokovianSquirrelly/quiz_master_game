@@ -8,8 +8,11 @@ import 'database.dart';
 
 void main() async {
   // var db = await useDatabase();
-  EventText text = await getText("spelling");
-  runApp(MaterialApp(home: Text(text.toString(),)));
+  EventText text = await getText("science");
+  runApp(MaterialApp(
+      home: Text(
+    text.toString(),
+  )));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,48 +22,54 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          canvasColor: Colors.white,
-          textButtonTheme: TextButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent), //.black38
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-              overlayColor: MaterialStateProperty.all<Color>(Colors.green.shade600),
-              padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
-              fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
-              elevation: MaterialStateProperty.all(1),
-              shadowColor: MaterialStateProperty.all<Color>(Colors.black38),
+            canvasColor: Colors.white,
+            textButtonTheme: TextButtonThemeData(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Colors.transparent), //.black38
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                overlayColor:
+                    MaterialStateProperty.all<Color>(Colors.green.shade600),
+                padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
+                fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
+                elevation: MaterialStateProperty.all(1),
+                shadowColor: MaterialStateProperty.all<Color>(Colors.black38),
+              ),
             ),
-          ),
-          textTheme: TextTheme(
-            button: const TextStyle(
-              fontSize: 30,
-              fontFamily: "Cambria",
-              // shadows: [Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 5),],
-            ),
-            headline2: TextStyle(
-              fontSize: 30,
-              color: Colors.green.shade600,
-              fontFamily: "Cambria",
-              fontWeight: FontWeight.w500,
-              shadows: const [Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 7),],
-            ),
-            headline1: TextStyle(
-              fontSize: 50,
-              color: Colors.green.shade600,
-              fontFamily: "Cambria",
-              fontWeight: FontWeight.w500,
-              shadows: const [Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 7),],
-            ),
-
-          )
-      ),
-      darkTheme: ThemeData.dark(),
-      title: "Quiz Master",
-      debugShowCheckedModeBanner: false,
-      home: const Scaffold(
-        body: MyHomePage(title: "Home Page"),
-      )
-      // Scaffold()
-    );
+            textTheme: TextTheme(
+              button: const TextStyle(
+                fontSize: 30,
+                fontFamily: "Cambria",
+                // shadows: [Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 5),],
+              ),
+              headline2: TextStyle(
+                fontSize: 30,
+                color: Colors.green.shade600,
+                fontFamily: "Cambria",
+                fontWeight: FontWeight.w500,
+                shadows: const [
+                  Shadow(
+                      color: Colors.black, offset: Offset(0, 0), blurRadius: 7),
+                ],
+              ),
+              headline1: TextStyle(
+                fontSize: 50,
+                color: Colors.green.shade600,
+                fontFamily: "Cambria",
+                fontWeight: FontWeight.w500,
+                shadows: const [
+                  Shadow(
+                      color: Colors.black, offset: Offset(0, 0), blurRadius: 7),
+                ],
+              ),
+            )),
+        darkTheme: ThemeData.dark(),
+        title: "Quiz Master",
+        debugShowCheckedModeBanner: false,
+        home: const Scaffold(
+          body: MyHomePage(title: "Home Page"),
+        )
+        // Scaffold()
+        );
   }
 }
