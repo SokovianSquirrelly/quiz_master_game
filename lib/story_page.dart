@@ -248,9 +248,9 @@ class _StoryPageState extends State<StoryPage> {
                                   padding: EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 0)),
 
-                              SizedBox(
-                                width: 25,
-                                height: 25,
+                              CircleAvatar(
+                                backgroundColor: Colors.green.shade600,
+                                radius: 25,
                                 child: QuizTimer(stop: stop,onTimeOut: () { onTimeOut(); },),
                               ),
                               const Padding(
