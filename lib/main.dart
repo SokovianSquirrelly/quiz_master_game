@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
               fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
               elevation: MaterialStateProperty.all(1),
-              shadowColor: MaterialStateProperty.all<Color>(Colors.blue),
+              shadowColor: MaterialStateProperty.all<Color>(Colors.brown),
             ),
           ),
           textTheme: TextTheme(
