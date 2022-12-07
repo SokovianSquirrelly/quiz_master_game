@@ -69,7 +69,7 @@ Future<EventText> getText(subject) async {
   final db = await useDatabase();
   List<Save> currSave = await getSaves(db);
   var eventText = new EventText(
-      question: "a", answer1: "a", answer2: "a", answer3: "a", story: "a");
+      question: "a", answer1: "a", answer2: "a", answer3: "a", story: "a", subject: "a");
   int eventID = currSave[0].event_id;
   if (subject == "science") {
     eventID = currSave[0].science_event;
@@ -112,6 +112,7 @@ class EventText {
   final String answer2;
   final String answer3;
   final String story;
+  final String subject;
 
   const EventText({
     required this.question,
@@ -119,6 +120,7 @@ class EventText {
     required this.answer2,
     required this.answer3,
     required this.story,
+    required this.subject,
   });
 
   Map<String, dynamic> toMap() {
@@ -128,12 +130,13 @@ class EventText {
       'answer2': answer2,
       'answer3': answer3,
       'story': story,
+      'subject': subject,
     };
   }
 
   @override
   String toString() {
-    return 'EventText{question: $question, answer1: $answer1, answer2: $answer2, answer3: $answer3, story: $story}';
+    return 'EventText{question: $question, answer1: $answer1, answer2: $answer2, answer3: $answer3, story: $story, subject: $subject}';
   }
 }
 
@@ -875,7 +878,7 @@ Future<List<Save>> getSaves(db) async {
 Future<EventText> getEventInfo(db, eventID) async {
   // Query the table for question associated with an event.
   final List<Map> maps = await db.rawQuery(
-      "SELECT q.question_text, a1.answer_string AS answer1, a2.answer_string AS answer2, a3.answer_string AS answer3, s.story_string " +
+      "SELECT q.question_text, a1.answer_string AS answer1, a2.answer_string AS answer2, a3.answer_string AS answer3, s.story_string, q.question_subject as subject " +
           "FROM events e " +
           "LEFT JOIN question q on q.event_id = e.event_id " +
           "LEFT JOIN answer a1 ON e.event_id = a1.event_id " +
@@ -893,6 +896,7 @@ Future<EventText> getEventInfo(db, eventID) async {
       answer2: maps[0]['answer2'],
       answer3: maps[0]['answer3'],
       story: maps[0]['story_string'],
+      subject: maps[0]['subject'],
     );
   });
   return eventList[0];
