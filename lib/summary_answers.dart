@@ -114,7 +114,7 @@ class SummaryAnswers extends StatelessWidget {
               onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => StoryPage(subject: subject)),
+                  MaterialPageRoute(builder: (context) => StoryPage(subject: subject.toLowerCase())),
                 );
               },
               child: const Text("Next"),
