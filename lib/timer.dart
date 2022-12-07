@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class QuizTimer extends StatefulWidget {
-  const QuizTimer({super.key, required this.onTimeOut});
+  const QuizTimer({super.key,required this.stop, required this.onTimeOut});
   final void Function() onTimeOut;
+  final bool stop;
 
   @override
   State<QuizTimer> createState()  => _QuizTimerState();
@@ -52,6 +53,9 @@ class _QuizTimerState extends State<QuizTimer> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.stop){
+      stopTimer();
+    }
     String strDigits(int n) => n.toString().padLeft(2, '0');
     final seconds = strDigits(duration.inSeconds);
     return Text(

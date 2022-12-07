@@ -27,6 +27,8 @@ class _StoryPageState extends State<StoryPage> {
       answer3: "answer 3",
       story: "story");
 
+  bool stop = false;
+
 
   void onTimeOut() {
     var correct = false;
@@ -89,6 +91,9 @@ class _StoryPageState extends State<StoryPage> {
                     correct: correct,
                   )),
             );
+            setState(() {
+              stop = true;
+            });
           });
         },
         child: Text(answers[0]),
@@ -114,6 +119,9 @@ class _StoryPageState extends State<StoryPage> {
                     correct: correct,
                   )),
             );
+            setState(() {
+              stop = true;
+            });
           });
         },
         child: Text(answers[1]),
@@ -139,6 +147,9 @@ class _StoryPageState extends State<StoryPage> {
                     correct: correct,
                   )),
             );
+            setState(() {
+              stop = true;
+            });
           });
         },
         child: Text(answers[2]),
@@ -221,7 +232,7 @@ class _StoryPageState extends State<StoryPage> {
                               SizedBox(
                                 width: 25,
                                 height: 25,
-                                child: QuizTimer(onTimeOut: () { onTimeOut(); },),
+                                child: QuizTimer(stop: stop,onTimeOut: () { onTimeOut(); },),
                               ),
                               const Padding(
                                   padding: EdgeInsets.symmetric(
