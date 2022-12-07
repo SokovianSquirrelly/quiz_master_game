@@ -54,6 +54,7 @@ Future<int> updateSave(correct) async {
   } else if (save.event_id == save.spelling_event) {
     save.spelling_event += 1;
   }
+
   save.event_id += 1;
 
   await db.update(
@@ -149,7 +150,6 @@ Future<Database> useDatabase() async {
   String path = join(databasesPath, 'data.db');
 
   // Delete the database
-  await deleteDatabase(path);
 
   // var db = await openDatabase('data.db');
 
