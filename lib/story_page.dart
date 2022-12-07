@@ -172,13 +172,14 @@ class _StoryPageState extends State<StoryPage> {
 
     // var timer = const QuizTimer();
     // timer.startTimer();
+    String background = "assets/images/${widget.subject}.png";
 
 
     return Container(
         constraints: const BoxConstraints.expand(),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/simple-background.png'),
+              image: AssetImage(background),
               fit: BoxFit.cover),
         ),
         child: Scaffold(

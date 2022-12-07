@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
           textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent), //.black38
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               overlayColor: MaterialStateProperty.all<Color>(Colors.green.shade600),
               padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
               fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
               elevation: MaterialStateProperty.all(1),
-              shadowColor: MaterialStateProperty.all<Color>(Colors.black38),
+              shadowColor: MaterialStateProperty.all<Color>(Colors.blue),
             ),
           ),
           textTheme: TextTheme(
