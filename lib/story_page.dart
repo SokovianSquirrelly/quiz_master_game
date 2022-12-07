@@ -185,7 +185,17 @@ class _StoryPageState extends State<StoryPage> {
         child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              automaticallyImplyLeading: true,
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                tooltip: 'Settings',
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    stop = true;
+                  });
+                },
+              ),
               backgroundColor: Colors.green.shade600,
               title: Text(widget.subject),
               actions: <Widget>[
@@ -199,6 +209,9 @@ class _StoryPageState extends State<StoryPage> {
                           builder: (context) =>
                               const Settings(title: 'Settings')),
                     );
+                    // setState(() {
+                    //   stop = true;
+                    // });
                   },
                 ),
                 IconButton(
@@ -211,6 +224,9 @@ class _StoryPageState extends State<StoryPage> {
                           builder: (context) =>
                               const MyHomePage(title: 'Home Page')),
                     );
+                    setState(() {
+                      stop = true;
+                    });
                   },
                 ),
               ],
