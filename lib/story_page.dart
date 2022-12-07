@@ -27,9 +27,24 @@ class _StoryPageState extends State<StoryPage> {
       answer3: "answer 3",
       story: "story");
 
-  // void getStory() async{
-  //   text = await getText(subject);
-  // }
+
+  void onTimeOut() {
+    var correct = false;
+    int score = 0;
+    updateSave(correct).then((result){
+      score = result;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SummaryAnswers(
+              subject: widget.subject,
+              score: score,
+              answer: text.answer1,
+              correct: correct,
+            )),
+      );
+    });
+  }
 
   Widget questions(BuildContext context, EventText text) {
     var order = [Random().nextInt(3), Random().nextInt(2), 0];
@@ -62,17 +77,19 @@ class _StoryPageState extends State<StoryPage> {
           if (answers[0] == text.answer1){
             correct = true;
           }
-          updateSave();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SummaryAnswers(
-                      subject: widget.subject,
-                      score: score,
-                      answer: text.answer1,
-                      correct: correct,
-                    )),
-          );
+          updateSave(correct).then((result){
+            score = result;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SummaryAnswers(
+                    subject: widget.subject,
+                    score: score,
+                    answer: text.answer1,
+                    correct: correct,
+                  )),
+            );
+          });
         },
         child: Text(answers[0]),
       ),
@@ -85,17 +102,19 @@ class _StoryPageState extends State<StoryPage> {
           if (answers[1] == text.answer1){
             correct = true;
           }
-          updateSave();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SummaryAnswers(
-                      subject: widget.subject,
-                      score: score,
-                      answer: text.answer1,
-                      correct: correct,
-                    )),
-          );
+          updateSave(correct).then((result){
+            score = result;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SummaryAnswers(
+                    subject: widget.subject,
+                    score: score,
+                    answer: text.answer1,
+                    correct: correct,
+                  )),
+            );
+          });
         },
         child: Text(answers[1]),
       ),
@@ -108,17 +127,19 @@ class _StoryPageState extends State<StoryPage> {
           if (answers[2] == text.answer1){
             correct = true;
           }
-          updateSave();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SummaryAnswers(
-                      subject: widget.subject,
-                      score: score,
-                      answer: text.answer1,
-                      correct: correct,
-                    )),
-          );
+          updateSave(correct).then((result){
+            score = result;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SummaryAnswers(
+                    subject: widget.subject,
+                    score: score,
+                    answer: text.answer1,
+                    correct: correct,
+                  )),
+            );
+          });
         },
         child: Text(answers[2]),
       ),
@@ -136,8 +157,9 @@ class _StoryPageState extends State<StoryPage> {
     //   return text;
     // });
 
-    var timer = QuizTimer();
-    timer.startTimer();
+    // var timer = const QuizTimer();
+    // timer.startTimer();
+
 
     return Container(
         constraints: const BoxConstraints.expand(),
@@ -199,7 +221,7 @@ class _StoryPageState extends State<StoryPage> {
                               SizedBox(
                                 width: 25,
                                 height: 25,
-                                child: timer.build(context),
+                                child: QuizTimer(onTimeOut: () { onTimeOut(); },),
                               ),
                               const Padding(
                                   padding: EdgeInsets.symmetric(

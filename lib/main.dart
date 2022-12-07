@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
-import 'timer.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
-
-  var timer = QuizTimer();
+   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

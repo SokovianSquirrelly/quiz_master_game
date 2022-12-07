@@ -1,7 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class QuizTimer extends State {
+class QuizTimer extends StatefulWidget {
+  const QuizTimer({super.key, required this.onTimeOut});
+  final void Function() onTimeOut;
+
+  @override
+  State<QuizTimer> createState()  => _QuizTimerState();
+}
+
+class _QuizTimerState extends State<QuizTimer> {
   Timer? countdownTimer;
   Duration duration = const Duration(seconds: 15);
   bool timeOut = false;
@@ -10,10 +18,6 @@ class QuizTimer extends State {
   void initState()
   {
     super.initState();
-  }
-
-  void startTimer()
-  {
     countdownTimer = Timer.periodic(const Duration(seconds: 1),
             (_) => setCountdown());
   }
@@ -31,6 +35,7 @@ class QuizTimer extends State {
       if (seconds < 0) {
         timeOut = true;
         countdownTimer!.cancel();
+        widget.onTimeOut();
       }
       else {
         duration = Duration(seconds: seconds);
@@ -43,17 +48,18 @@ class QuizTimer extends State {
     return timeOut;
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
     final seconds = strDigits(duration.inSeconds);
-    startTimer();
     return Text(
-            seconds,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 20),
-            );
+      seconds,
+      style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 20),
+    );
   }
 }
