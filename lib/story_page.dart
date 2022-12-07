@@ -25,7 +25,9 @@ class _StoryPageState extends State<StoryPage> {
       answer1: "answer 1",
       answer2: "answer 2",
       answer3: "answer 3",
-      story: "story");
+      story: "story",
+      subject: "subject"
+  );
 
   bool stop = false;
 
@@ -85,7 +87,7 @@ class _StoryPageState extends State<StoryPage> {
               context,
               MaterialPageRoute(
                   builder: (context) => SummaryAnswers(
-                    subject: widget.subject,
+                    subject: text.subject,
                     score: score,
                     answer: text.answer1,
                     correct: correct,
@@ -113,7 +115,7 @@ class _StoryPageState extends State<StoryPage> {
               context,
               MaterialPageRoute(
                   builder: (context) => SummaryAnswers(
-                    subject: widget.subject,
+                    subject: text.subject,
                     score: score,
                     answer: text.answer1,
                     correct: correct,
@@ -141,7 +143,7 @@ class _StoryPageState extends State<StoryPage> {
               context,
               MaterialPageRoute(
                   builder: (context) => SummaryAnswers(
-                    subject: widget.subject,
+                    subject: text.subject,
                     score: score,
                     answer: text.answer1,
                     correct: correct,
@@ -239,7 +241,7 @@ class _StoryPageState extends State<StoryPage> {
                                       vertical: 15, horizontal: 0)),
 
                               Text(
-                                widget.subject,//"Title goes here",
+                                text.subject,//"Title goes here",
                                 style: Theme.of(context).textTheme.headline1,
                               ),
                               const Padding(
