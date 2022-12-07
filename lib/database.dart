@@ -33,7 +33,6 @@ and any story text associated. The first answer
 returned will always be the correct answer for
 the question.
 */
-
 // Functions for external use
 Future<int> updateSave(correct) async {
   final db = await useDatabase();
