@@ -39,15 +39,17 @@ class MyHomePage extends StatelessWidget {
           Center(
             child: Column(
               children: const <Widget>[
-                Padding(padding: EdgeInsets.symmetric(vertical: 50,horizontal: 0)),
-                Text(
-                  'Quiz Master',
-                  style: TextStyle(
-                    fontSize: 70,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                ),
+                Padding(padding: EdgeInsets.symmetric(vertical: 10,horizontal: 0)),
+                // Text(
+                //   'Quiz Master',
+                //   style: TextStyle(
+                //     fontSize: 70,
+                //     fontWeight: FontWeight.bold,
+                //     color: Colors.green,
+                //   ),
+                // ),
+                // Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                Image(image: AssetImage('assets/images/quiz-master.png'), height: 300,),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                 ContinueButton(),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
