@@ -5,10 +5,12 @@ import 'story_page.dart';
 
 class SummaryAnswers extends StatelessWidget {
   // const SummaryAnswers({required Key key, required this.index, required this.question}) : super(key: key);
-  const SummaryAnswers({ super.key, required this.index});
+  const SummaryAnswers({ super.key, required this.score, required this.answer, required this.subject, required this.correct});
 
-  final int index;
-  final String title = "Answers";
+  final String subject;
+  final int score;
+  final String answer;
+  final bool correct;
   // final Question question;
 
   get circleAvatarBackground => null;
@@ -39,18 +41,22 @@ class SummaryAnswers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var image = 'assets/images/green-correct.png';
+    if (!correct){
+      image = 'assets/images/red-incorrect.png';
+    }
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 18),
       constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage('assets/images/green-correct.png'),
-        // fit: BoxFit.cover
-        ),
-      ),
+      // decoration: const BoxDecoration(
+      //   image: DecorationImage(
+      //   image: AssetImage('assets/images/green-correct.png'),
+      //   // fit: BoxFit.cover
+      //   ),
+      // ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text(subject),
           automaticallyImplyLeading: false,
           leading: IconButton(
             icon: const Icon(Icons.home),
@@ -77,28 +83,42 @@ class SummaryAnswers extends StatelessWidget {
           ],
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Center(
-              child: Column(
-                        children:[
-                          Text("question",
-                            style: Theme.of(context).textTheme.headline1,
-                            ), //'${question.question}',
-                          const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
-                          TextButton( //
-                            onPressed: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const StoryPage(title: "Old Story")),
-                              );
-                            },
-                            child: const Text("Next"),
-                          ),
-                      ]
-              ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 4.0),
+                  child: CircleAvatar(
+                    backgroundColor: circleAvatarBackground,
+                    radius: circleAvatarRadius,
+                    child: Text(
+                      '$score',
+                      style: questionStyle,
+                    ),
+                  ),
+                ),
+                Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(answer), //'${question.question}',
+                      // style: questionStyle, textAlign: TextAlign.center),
+                    )),
+              ],
             ),
 
+            Image(image: AssetImage(image),),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+
+            TextButton( //
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StoryPage(subject: subject.toLowerCase())),
+                );
+              },
+              child: const Text("Next"),
+            ),
             // Column(children: _buildAnswers(question)),
           ],
         ),
