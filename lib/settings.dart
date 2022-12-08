@@ -135,6 +135,7 @@ class _SettingsState extends State<Settings> {
                         child: Text("Sound",),
                       ),
                       Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
+                      //by using boolean
                       TextButton(
                         onPressed: (){
                           themeNotifier.isDark

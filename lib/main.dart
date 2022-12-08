@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       child: Consumer(
           builder: (context, ThemeModel themeNotifier, child){
             return MaterialApp(
+                //light theme and dark theme
                 theme: themeNotifier.isDark? ThemeData(
                     appBarTheme: AppBarTheme(
                       backgroundColor: Colors.green.shade600,
@@ -88,6 +89,7 @@ class MyApp extends StatelessWidget {
                       ),
                     )
                 ),
+                //light theme and dark theme end
                 title: "Quiz Master",
                 debugShowCheckedModeBanner: false,
                 home: const Scaffold(
