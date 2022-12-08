@@ -34,10 +34,15 @@ returned will always be the correct answer for
 the question.
 */
 // Functions for external use
+
+// updateSave is used to update the current event information to
+// the next question after one is completed. It increments the score
+// and returns that value to the program
 Future<int> updateSave(correct) async {
   final db = await useDatabase();
   List<Save> saves = await getSaves(db);
   Save save = saves[0];
+  // If the answer was correct, we increase the score
   if (correct) {
     save.correct_answers += 1;
   } else {
@@ -54,7 +59,7 @@ Future<int> updateSave(correct) async {
   } else if (save.event_id == save.spelling_event) {
     save.spelling_event += 1;
   }
-
+  // Move on to the next question
   save.event_id += 1;
 
   await db.update(
@@ -63,9 +68,12 @@ Future<int> updateSave(correct) async {
     where: 'save_id = ?',
     whereArgs: [save.save_id],
   );
+  // We return the score with this call to be displayed to the player
   return save.correct_answers;
 }
 
+// This function is used to get the text to display for the questions,
+// answers, story, and also returns the subject of the question.
 Future<EventText> getText(subject) async {
   final db = await useDatabase();
   List<Save> currSave = await getSaves(db);
@@ -142,6 +150,9 @@ class EventText {
 }
 
 // Functions for internal use
+
+// useDatabase creates the tables if they don't exist, fills them with data if
+// they dont have it, then returns the database object to the program to be used.
 Future<Database> useDatabase() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -149,14 +160,10 @@ Future<Database> useDatabase() async {
   var databasesPath = await getDatabasesPath();
   String path = join(databasesPath, 'data.db');
 
-  // Delete the database
-
-  // var db = await openDatabase('data.db');
-
   // open the database
   Database database = await openDatabase(path, version: 1,
       onCreate: (Database db, int version) async {
-    // When creating the db, create the table
+    // When creating the db, create the tables
     await db.execute(
         'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);');
     await db.execute(
@@ -795,54 +802,17 @@ Future<Database> useDatabase() async {
         'VALUES'
         '(1, 0, 0, 1, 1, 21, 41, 61, 81)');
   });
-  //
-  // final database = openDatabase('data.db',
-  // onCreate: (db, version) {
-  // Run the CREATE TABLE statement on the database.
-  //   return db.execute(
-  //     'CREATE TABLE IF NOT EXISTS save(save_id INTEGER PRIMARY KEY NOT NULL, correct_answers INTEGER NOT NULL, wrong_answers INTEGER NOT NULL, event_id INTEGER NOT NULL, science_event INT DEFAULT 0 NOT NULL, math_event INT DEFAULT 0 NOT NULL, geography_event INT DEFAULT 0 NOT NULL, spelling_event INT DEFAULT 0 NOT NULL, programming_event INT DEFAULT 0 NOT NULL);'
-  //         'CREATE TABLE IF NOT EXISTS event(event_id INTEGER PRIMARY KEY NOT NULL);'
-  //         'CREATE TABLE IF NOT EXISTS question(question_id INTEGER PRIMARY KEY NOT NULL, question_number INTEGER NOT NULL, question_text VARCHAR(255) NOT NULL, question_subject VARCHAR(255) NOT NULL, event_id INTEGER NOT NULL);'
-  //         'CREATE TABLE IF NOT EXISTS story(story_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, story_string VARCHAR(255) NOT NULL);'
-  //         'CREATE TABLE IF NOT EXISTS answer(answer_id INTEGER PRIMARY KEY NOT NULL, event_id INTEGER NOT NULL, answer_string VARCHAR(255) NOT NULL, is_correct TINYINT NOT NULL);'
-  //         'INSERT IGNORE INTO answer (answer_id, event_id, answer_string, is_correct)'
-  //           'VALUES'
-  //           '(1, 1, "a", 1),'
-  //           '(2, 1, "b", 0),'
-  //           '(3, 1, "c", 0),'
-  //           '(4, 2, "d", 1),'
-  //           '(5, 2, "e", 0),'
-  //           '(6, 2, "g", 0);'
-  //
-  //         'INSERT IGNORE INTO story (story_id, event_id, story_string)'
-  //           'VALUES'
-  //             '(1, 2, "f");'
-  //
-  //         'INSERT IGNORE INTO event (event_id)'
-  //           'VALUES'
-  //             '(1),'
-  //             '(2);'
-  //
-  //         'INSERT IGNORE INTO question (question_id, question_number, question_text, question_subject, event_id)'
-  //           'VALUES'
-  //             '(1, 1, "What is the first letter of the Alphabet?", "spelling", 1);'
-  //
-  //         'INSERT IGNORE INTO save (save_id, correct_answers, wrong_answers, event_id, science_event, math_event, geography_event, spelling_event, programming_event)'
-  //           'VALUES'
-  //             '(1, 0, 0, 1, 1, 21, 41, 61, 81)'
-  //   );
-  //
-  // },
-  //     version: 1,
-  // );
 
   return database;
 }
 
+// closes connection to the database
 Future closeDatabase(database) async {
   await database.close;
 }
 
+// function not currently used, example for inserting object as to db
+// could be used to allow for multiple save files
 Future insertSave(Save save) async {
   // Get a reference to the database.
   final db = await useDatabase();
@@ -855,6 +825,7 @@ Future insertSave(Save save) async {
   closeDatabase(db);
 }
 
+// Creates a list of the items in the save table as Save class objects.
 Future<List<Save>> getSaves(db) async {
   // Query the table for saves.
   final List<Map<String, dynamic>> maps = await db.query('save');
@@ -875,8 +846,11 @@ Future<List<Save>> getSaves(db) async {
   });
 }
 
+// Query designed to pull information necessary to populate an EventText object
+// Query returns the correct answer as the first answer in the list.
 Future<EventText> getEventInfo(db, eventID) async {
   // Query the table for question associated with an event.
+  // rawQuery used to perform alias joins
   final List<Map> maps = await db.rawQuery(
       "SELECT q.question_text, a1.answer_string AS answer1, a2.answer_string AS answer2, a3.answer_string AS answer3, s.story_string, q.question_subject as subject " +
           "FROM events e " +
