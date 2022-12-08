@@ -90,6 +90,8 @@ class GameChoice extends StatelessWidget {
                   children: [
                     const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                     Text('Choose a topic',
+
+                      // here is an example of the text theme being implemented
                       style: Theme.of(context).textTheme.headline1,),
                     const Padding(padding: EdgeInsets.symmetric(vertical: 15,horizontal: 0)),
                     TextButton(

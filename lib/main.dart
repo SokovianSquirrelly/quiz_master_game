@@ -18,30 +18,41 @@ class MyApp extends StatelessWidget {
       child: Consumer(
           builder: (context, ThemeModel themeNotifier, child){
             return MaterialApp(
+              //This is the default theme data for light mode
                 theme: themeNotifier.isDark? ThemeData(
                     appBarTheme: AppBarTheme(
                       backgroundColor: Colors.green.shade600,
                     ),
+                    // this will be the default style for all of the buttons
                     textButtonTheme: TextButtonThemeData(
                       style: ButtonStyle(
+                        // color will be back with a 38% opacity
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.black38),
+                        // text will be black
                         foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                        // when the button is clicked it, the click event of the button will be green
                         overlayColor: MaterialStateProperty.all<Color>(Colors.green.shade600),
+                        // this will set the padding according to the text
                         padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
+                        // this will set a specific width of the buttons
                         fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
                       ),
                     ),
                     textTheme: TextTheme(
+                      // this will be the data for assigned text themes (see the game_choice page for an example of it being implemented)
+                      // here is the text theme for the button
                       button: const TextStyle(
                         fontSize: 30,
                         fontFamily: "Cambria",
                       ),
+                      //here is the text theme for headline2 which is the medium text
                       headline2: TextStyle(
                         fontSize: 30,
                         color: Colors.green.shade600,
                         fontFamily: "Cambria",
                         fontWeight: FontWeight.w500,
                       ),
+                      // here is the text theme for headline1 which is the larger text
                       headline1: TextStyle(
                         fontSize: 50,
                         color: Colors.green.shade600,
@@ -66,6 +77,7 @@ class MyApp extends StatelessWidget {
                         foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                         overlayColor: MaterialStateProperty.all<Color>(Colors.grey),
                         padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
+                        // this will set the width of the buttons
                         fixedSize: MaterialStateProperty.all(const Size.fromWidth(325)),
                       ),
                     ),
