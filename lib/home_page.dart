@@ -20,6 +20,7 @@ class MyHomePage extends StatelessWidget {
               automaticallyImplyLeading: false,
               backgroundColor: Colors.green.shade600,
               actions: <Widget>[
+                //dark mode button (sun and moon icon)
                 IconButton(
                     onPressed: (){
                       themeNotifier.isDark
