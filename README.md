@@ -1,6 +1,6 @@
-# quiz master game
+# Quiz master game
 
-{Provide a description of your team project.  Describe how to use the software.}
+<!-- {Provide a description of your team project.  Describe how to use the software.} -->
 This is a quiz game that can test a students knowledge of Science, Math, Geography, Spelling, or Programming
 To make it fun we planned to have each question come with a little bit of a story, with each question combining to make a fun narrative story. 
 When the app starts up the Home Page is shown
@@ -10,9 +10,9 @@ Back on the Home Page, if you select "Continue" you are taken to the next questi
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+<!-- {Describe the tools that you used to develop the software}
 
-{Describe the programming language that you used and any libraries.}
+{Describe the programming language that you used and any libraries.} -->
 
 # Collaborators
 
@@ -42,4 +42,3 @@ Back on the Home Page, if you select "Continue" you are taken to the next questi
 * Resetting the progress in a subject when opened from New Game => Game Choice
 * Fix transfer from one subject to the next, specifically the background
 * Make and populate database when the app is installed or first opened instead of at every call to getText when a new story page is made
-* 
